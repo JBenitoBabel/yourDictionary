@@ -1,0 +1,108 @@
+// ============================================
+// FONT SIZE SYSTEM - yourDictionary
+// ============================================
+// Sistema de control de tamaño de letra
+
+// ============================================
+// CSS Variables para font-size
+// ============================================
+:root {
+  // Base font size (se modifica con --font-scale)
+  --font-base: calc(16px * var(--font-scale));
+  
+  // Font scale (se actualiza desde SettingsService)
+  --font-scale: 1;
+  
+  // Multiplicadores para diferentes tamaños
+  --font-multiplier-xs: 0.75;     // 12px
+  --font-multiplier-sm: 0.875;    // 14px
+  --font-multiplier-base: 1;      // 16px
+  --font-multiplier-lg: 1.125;    // 18px
+  --font-multiplier-xl: 1.25;     // 20px
+  --font-multiplier-2xl: 1.5;     // 24px
+  --font-multiplier-3xl: 2;       // 32px
+  --font-multiplier-4xl: 2.5;     // 40px
+}
+
+// ============================================
+// Font Size Tokens
+// ============================================
+// Usar estas variables en componentes
+:root {
+  --font-size-xs: calc(var(--font-base) * var(--font-multiplier-xs));
+  --font-size-sm: calc(var(--font-base) * var(--font-multiplier-sm));
+  --font-size-base: calc(var(--font-base) * var(--font-multiplier-base));
+  --font-size-lg: calc(var(--font-base) * var(--font-multiplier-lg));
+  --font-size-xl: calc(var(--font-base) * var(--font-multiplier-xl));
+  --font-size-2xl: calc(var(--font-base) * var(--font-multiplier-2xl));
+  --font-size-3xl: calc(var(--font-base) * var(--font-multiplier-3xl));
+  --font-size-4xl: calc(var(--font-base) * var(--font-multiplier-4xl));
+}
+
+// ============================================
+// Font Scale Presets
+// ============================================
+// Se aplican al seleccionar en Settings
+[data-font-size="small"] {
+  --font-scale: 0.875;
+}
+
+[data-font-size="medium"] {
+  --font-scale: 1;
+}
+
+[data-font-size="large"] {
+  --font-scale: 1.125;
+}
+
+// ============================================
+// HTML Root
+// ============================================
+html {
+  font-size: var(--font-base);
+}
+
+// ============================================
+// Typography Classes
+// ============================================
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+
+// ============================================
+// Component-specific font sizes
+// ============================================
+ion-title {
+  font-size: var(--font-size-lg);
+}
+
+ion-button {
+  font-size: var(--font-size-base);
+}
+
+ion-label {
+  font-size: var(--font-size-base);
+}
+
+ion-input,
+ion-select,
+ion-textarea {
+  font-size: var(--font-size-base);
+}
+
+ion-card-title {
+  font-size: var(--font-size-lg);
+}
+
+ion-card-subtitle {
+  font-size: var(--font-size-sm);
+}
+
+ion-card-content {
+  font-size: var(--font-size-base);
+}

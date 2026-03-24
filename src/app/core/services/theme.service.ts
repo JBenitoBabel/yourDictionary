@@ -12,28 +12,23 @@ export class ThemeService {
   fontSize = this.fontSizeSignal.asReadonly();
 
   constructor() {
+    // Effect: Apply theme to document
     effect(() => {
       const theme = this.themeSignal();
       document.documentElement.setAttribute('data-theme', theme);
     });
 
+    // Effect: Apply font size to document
+    // Uses data-font-size attribute which CSS variables react to
     effect(() => {
       const fontSize = this.fontSizeSignal();
       document.documentElement.setAttribute('data-font-size', fontSize);
-      const root = document.documentElement;
-      switch (fontSize) {
-        case 'small':
-          root.style.fontSize = '14px';
-          break;
-        case 'medium':
-          root.style.fontSize = '16px';
-          break;
-        case 'large':
-          root.style.fontSize = '18px';
-          break;
-      }
     });
   }
+
+  // ============================================
+  // Theme Methods
+  // ============================================
 
   getTheme(): Theme {
     return this.themeSignal();
@@ -50,6 +45,10 @@ export class ThemeService {
   isDark(): boolean {
     return this.themeSignal() === 'dark';
   }
+
+  // ============================================
+  // Font Size Methods
+  // ============================================
 
   getFontSize(): FontSize {
     return this.fontSizeSignal();

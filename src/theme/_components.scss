@@ -1,0 +1,169 @@
+// ============================================
+// IONIC COMPONENT OVERRIDES - yourDictionary
+// ============================================
+// Overrides mínimos y no agresivos a componentes Ionic
+
+// ============================================
+// Header
+// ============================================
+ion-header {
+  --background: var(--color-surface);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+ion-toolbar {
+  --background: var(--color-surface);
+  --border-width: 0;
+  --padding-top: var(--space-sm);
+  --padding-bottom: var(--space-sm);
+}
+
+ion-title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+// ============================================
+// Content
+// ============================================
+ion-content {
+  --background: var(--color-background);
+  --padding-bottom: 100px; // Compensar footer y FAB
+}
+
+// ============================================
+// Buttons
+// ============================================
+ion-button {
+  --border-radius: var(--radius-md);
+  height: 48px;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-body);
+  text-transform: none;
+  transition: all var(--transition-fast);
+}
+
+// ============================================
+// FAB
+// ============================================
+ion-fab-button {
+  --background: var(--color-primary);
+  --color: var(--color-text-inverse);
+  --border-radius: var(--radius-full);
+  width: 56px;
+  height: 56px;
+}
+
+// ============================================
+// Cards
+// ============================================
+ion-card {
+  --background: var(--color-surface-elevated);
+  --border-radius: var(--radius-lg);
+  margin: 0;
+  padding: var(--space-md);
+}
+
+// ============================================
+// Lists
+// ============================================
+ion-list {
+  --background: transparent;
+  padding: 0;
+}
+
+ion-item {
+  --background: var(--color-surface);
+  --color: var(--color-text);
+  --border-radius: var(--radius-md);
+  --padding-start: var(--space-md);
+  --padding-end: var(--space-md);
+  --padding-top: var(--space-sm);
+  --padding-bottom: var(--space-sm);
+  --border-width: 0;
+  --inner-border-width: 0;
+  margin-bottom: var(--space-sm);
+}
+
+// ============================================
+// Inputs
+// ============================================
+ion-input,
+ion-select,
+ion-textarea {
+  --background: var(--color-surface);
+  --color: var(--color-text);
+  --border-radius: var(--radius-md);
+  --padding-start: var(--space-md);
+  --padding-end: var(--space-md);
+  --padding-top: var(--space-sm);
+  --padding-bottom: var(--space-sm);
+  height: 48px;
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition-fast);
+}
+
+ion-input:focus,
+ion-select:focus,
+ion-textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+ion-searchbar {
+  --background: var(--color-surface);
+  --border-radius: var(--radius-md);
+  --padding-start: var(--space-md);
+  --padding-end: var(--space-md);
+}
+
+// ============================================
+// Segment
+// ============================================
+ion-segment {
+  --background: var(--color-surface);
+}
+
+ion-segment-button {
+  --border-radius: var(--radius-md);
+}
+
+// ============================================
+// Modal
+// ============================================
+ion-modal {
+  --background: var(--color-background);
+}
+
+// ============================================
+// Back Button
+// ============================================
+ion-back-button {
+  color: var(--color-primary);
+}
+
+// ============================================
+// Labels
+// ============================================
+ion-label {
+  color: var(--color-text);
+}
+
+// ============================================
+// Badges
+// ============================================
+ion-badge {
+  --padding-start: var(--space-sm);
+  --padding-end: var(--space-sm);
+  --padding-top: var(--space-xs);
+  --padding-bottom: var(--space-xs);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+}

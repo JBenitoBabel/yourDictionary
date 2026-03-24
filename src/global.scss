@@ -1,9 +1,19 @@
 /*
  * App Global CSS - yourDictionary
  * ----------------------------------------------------------------------------
- * Diseño mobile-first, moderno y limpio
+ * Arquitectura de estilos modular
+ * 
+ * Estructura:
+ * - _variables.scss: Design tokens (colores, espaciado, etc.)
+ * - _typography.scss: Sistema tipográfico
+ * - _font-size.scss: Sistema de font-scale
+ * - _components.scss: Overrides de Ionic
+ * - _utilities.scss: Clases utilitarias
  */
 
+// ============================================
+// Ionic Core (requerido)
+// ============================================
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -14,259 +24,25 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import '@ionic/angular/css/palettes/dark.system.css';
 
-// ================================
-// CSS Variables - Base
-// ================================
-html, body {
-  --background: var(--background);
-  --surface: var(--surface);
-  --text: var(--text);
-  --text-secondary: var(--text-secondary);
-  --primary: var(--primary);
-  --secondary: var(--secondary);
-  --accent: var(--accent);
-  --text-on-primary: var(--text-on-primary);
-  
-  font-family: var(--ion-font-family);
-  font-size: var(--font-size-medium);
-  background: var(--background);
-  color: var(--text);
-}
+// ============================================
+// our Dictionary Custom Styles
+// ============================================
+@import "theme/_variables";
+@import "theme/_font-size";
+@import "theme/_typography";
+@import "theme/_components";
+@import "theme/_utilities";
 
-html {
-  font-size: var(--font-size-medium);
-}
-
-// ================================
-// Reset y base
-// ================================
+// ============================================
+// Base Styles
+// ============================================
 body {
-  background: var(--background);
-  color: var(--text);
-  margin: 0;
-  padding: 0;
+  background: var(--color-background);
+  color: var(--color-text);
 }
 
-// ================================
-// Ionic Components - Estilos unificados
-// ================================
-
-// Content
 ion-content {
-  --background: var(--background);
-  --padding-bottom: 100px;
-}
-
-// Header - Fixed con backdrop
-ion-header {
-  --background: var(--surface);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  border-bottom: 1px solid var(--text-secondary);
-}
-
-ion-toolbar {
-  --background: var(--surface);
-  --border-width: 0;
-  --padding-top: 8px;
-  --padding-bottom: 8px;
-}
-
-ion-title {
-  color: var(--primary) !important;
-  font-weight: 700;
-  font-size: 18px !important;
-}
-
-// Buttons
-ion-button {
-  --border-radius: 12px;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  height: 48px;
-  font-weight: 600;
-  text-transform: none;
-  --transition: all 0.2s ease;
-}
-
-// Primary button (default)
-ion-button:not([color]) {
-  --background: var(--primary);
-  --color: var(--text-on-primary);
-}
-
-ion-button:active:not([disabled]) {
-  transform: scale(0.98);
-  opacity: 0.9;
-}
-
-// FAB - Above footer
-ion-fab {
-  position: fixed;
-  z-index: 90;
-  bottom: 90px;
-}
-
-ion-fab-button {
-  --background: var(--primary);
-  --color: var(--text-on-primary);
-  --border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-// Cards
-ion-card {
-  --background: var(--surface);
-  --border-radius: 16px;
-  margin: 0;
-  padding: 16px;
-}
-
-// Lists
-ion-list {
-  --background: transparent;
-  padding: 0;
-}
-
-ion-item {
-  --background: var(--surface);
-  --color: var(--text);
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-top: 12px;
-  --padding-bottom: 12px;
-  margin-bottom: 8px;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-ion-item:hover {
-  --background: var(--surface);
-  opacity: 0.9;
-}
-
-// Labels
-ion-label {
-  color: var(--text) !important;
-}
-
-// Inputs
-ion-input, ion-select, ion-textarea {
-  --background: var(--surface);
-  --color: var(--text);
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  height: 48px;
-  border: 1px solid var(--text-secondary) !important;
-  margin-bottom: 16px;
-}
-
-ion-input:focus, ion-select:focus, ion-textarea:focus {
-  border-color: var(--primary) !important;
-}
-
-// Searchbar
-ion-searchbar {
-  --background: var(--surface);
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-}
-
-// Segment
-ion-segment {
-  --background: var(--surface);
-}
-
-ion-segment-button {
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-}
-
-// Modal
-ion-modal {
-  --background: var(--background);
-}
-
-// Back button
-ion-back-button {
-  color: var(--primary) !important;
-}
-
-// ================================
-// Texto - Colores forzados
-// ================================
-h1, h2, h3, h4, h5, h6, p, span, div, li, td, th {
-  color: var(--text) !important;
-}
-
-.text-secondary {
-  color: var(--text-secondary) !important;
-}
-
-.text-primary {
-  color: var(--primary) !important;
-}
-
-// ================================
-// Animaciones
-// ================================
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease-out;
-}
-
-.slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-// ================================
-// Utilidades
-// ================================
-.p-16 {
-  padding: 16px;
-}
-
-.m-16 {
-  margin: 16px;
-}
-
-.mb-8 {
-  margin-bottom: 8px;
-}
-
-.mb-16 {
-  margin-bottom: 16px;
-}
-
-.mt-16 {
-  margin-top: 16px;
-}
-
-.mt-24 {
-  margin-top: 24px;
-}
-
-// Safe area
-ion-content {
+  --background: var(--color-background);
   --padding-bottom: calc(100px + env(safe-area-inset-bottom));
 }

@@ -1,0 +1,145 @@
+// ============================================
+// DESIGN TOKENS - yourDictionary
+// ============================================
+// Variables CSS centralizadas para toda la app
+// Usar estos tokens en lugar de valores hardcodeados
+
+:root {
+  // ==========================================
+  // Colores primarios
+  // ==========================================
+  --color-primary: #FF6B35;
+  --color-primary-light: #FF8C5A;
+  --color-primary-dark: #E05C2F;
+  
+  --color-secondary: #F7931A;
+  --color-secondary-light: #FFA540;
+  --color-secondary-dark: #D98117;
+  
+  --color-accent: #FFD23F;
+  --color-accent-light: #FFE066;
+  
+  // ==========================================
+  // Colores semánticos
+  // ==========================================
+  --color-success: #2DD36F;
+  --color-warning: #FFC409;
+  --color-danger: #EB445A;
+  
+  // ==========================================
+  // Superficies y fondos
+  // ==========================================
+  --color-background: #FFFFFF;
+  --color-surface: #F8F8F8;
+  --color-surface-elevated: #FFFFFF;
+  
+  // ==========================================
+  // Texto
+  // ==========================================
+  --color-text: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-inverse: #FFFFFF;
+  
+  // ==========================================
+  // Bordes
+  // ==========================================
+  --color-border: #E0E0E0;
+  --color-border-light: #F0F0F0;
+  
+  // ==========================================
+  // Espaciado (múltiplos de 8px)
+  // ==========================================
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  
+  // ==========================================
+  // Border radius
+  // ==========================================
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  // ==========================================
+  // Sombras (mínimas, solo para elevación)
+  // ==========================================
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  // ==========================================
+  // Z-index layers
+  // ==========================================
+  --z-base: 1;
+  --z-header: 100;
+  --z-footer: 100;
+  --z-fab: 90;
+  --z-modal: 200;
+  --z-tooltip: 300;
+  
+  // ==========================================
+  // Timing
+  // ==========================================
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.35s ease;
+}
+
+// ============================================
+// DARK THEME
+// ============================================
+[data-theme="dark"] {
+  --color-background: #121212;
+  --color-surface: #1E1E1E;
+  --color-surface-elevated: #2D2D2D;
+  
+  --color-text: #FFFFFF;
+  --color-text-secondary: #A0A0A0;
+  --color-text-inverse: #1A1A1A;
+  
+  --color-border: #333333;
+  --color-border-light: #2D2D2D;
+  
+  --color-primary: #FF8C5A;
+  --color-secondary: #FFA540;
+  --color-accent: #FFE066;
+}
+
+// ============================================
+// Ionic Integration
+// ============================================
+// Mapear variables custom a variables de Ionic
+:root {
+  --ion-color-primary: var(--color-primary);
+  --ion-color-primary-rgb: 255, 107, 53;
+  --ion-color-primary-contrast: var(--color-text-inverse);
+  
+  --ion-color-secondary: var(--color-secondary);
+  --ion-color-secondary-rgb: 247, 147, 26;
+  
+  --ion-color-tertiary: var(--color-accent);
+  --ion-color-tertiary-contrast: var(--color-text);
+  
+  --ion-color-success: var(--color-success);
+  --ion-color-warning: var(--color-warning);
+  --ion-color-danger: var(--color-danger);
+  
+  --ion-background-color: var(--color-background);
+  --ion-background-color-rgb: 255, 255, 255;
+  
+  --ion-text-color: var(--color-text);
+  --ion-text-color-rgb: 26, 26, 26;
+}
+
+[data-theme="dark"] {
+  --ion-background-color: var(--color-background);
+  --ion-background-color-rgb: 18, 18, 18;
+  
+  --ion-text-color: var(--color-text);
+  --ion-text-color-rgb: 255, 255, 255;
+}
