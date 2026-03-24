@@ -4,20 +4,20 @@
   align-items: center;
   gap: 12px;
   padding: 20px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  box-shadow: var(--shadow-md);
+  background: var(--surface);
+  border-bottom: 2px solid var(--primary);
   animation: fadeIn 0.5s ease-out;
 
   .points-label {
     font-size: 1.1rem;
     font-weight: 500;
+    color: var(--text);
   }
 
   .points-value {
     font-size: 2rem;
     font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: var(--primary);
   }
 }
 
@@ -33,14 +33,13 @@
   border-radius: var(--border-radius-lg);
   padding: 24px;
   text-align: center;
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--text-secondary);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
   }
 
   &:active {
@@ -68,7 +67,7 @@
 }
 
 .claim-card {
-  background: linear-gradient(135deg, var(--surface), var(--accent));
+  background: var(--surface);
   border: 2px solid var(--accent);
   
   &:hover {
@@ -120,7 +119,6 @@
       font-weight: 800;
       color: var(--primary);
       margin-top: 12px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -136,23 +134,22 @@
     --padding-end: 20px;
     font-weight: 600;
     transition: all 0.3s ease;
+    border: 1px solid var(--text-secondary);
 
     &:hover:not(.disabled) {
       --background: var(--primary);
-      --color: white;
+      --color: var(--text-on-primary);
       transform: translateX(4px);
     }
 
     &.correct {
       --background: rgba(45, 211, 111, 0.15);
       border: 2px solid var(--ion-color-success);
-      --color: var(--ion-color-success);
     }
 
     &.incorrect {
       --background: rgba(235, 68, 90, 0.15);
       border: 2px solid var(--ion-color-danger);
-      --color: var(--ion-color-danger);
       animation: shake 0.5s ease-in-out;
     }
 
@@ -176,13 +173,13 @@
     animation: fadeIn 0.5s ease-out;
 
     &.correct {
-      background: linear-gradient(135deg, rgba(45, 211, 111, 0.2), rgba(45, 211, 111, 0.1));
+      background: rgba(45, 211, 111, 0.15);
       color: var(--ion-color-success);
       border: 2px solid var(--ion-color-success);
     }
 
     &.incorrect {
-      background: linear-gradient(135deg, rgba(235, 68, 90, 0.2), rgba(235, 68, 90, 0.1));
+      background: rgba(235, 68, 90, 0.15);
       color: var(--ion-color-danger);
       border: 2px solid var(--ion-color-danger);
     }

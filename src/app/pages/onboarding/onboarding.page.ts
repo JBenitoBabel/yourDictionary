@@ -6,8 +6,10 @@ import {
   IonCard,
   IonCardTitle,
   IonCardContent,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { SettingsService } from '../../core/services/settings.service';
+import { TranslationService } from '../../core/services/translation.service';
 import { AppLanguage } from '../../core/models/interfaces';
 
 interface LanguageOption {
@@ -27,10 +29,12 @@ interface LanguageOption {
     IonCard,
     IonCardTitle,
     IonCardContent,
+    IonButton,
   ]
 })
 export class OnboardingPage {
   private settingsService = inject(SettingsService);
+  private translationService = inject(TranslationService);
   private router = inject(Router);
 
   languages: LanguageOption[] = [
@@ -39,8 +43,21 @@ export class OnboardingPage {
     { code: 'fr', name: 'Français', flag: '🇫🇷' }
   ];
 
+  getTitle(): string {
+    return this.translationService.t('onboarding.title');
+  }
+
+  getSubtitle(): string {
+    return this.translationService.t('onboarding.subtitle');
+  }
+
+  getLanguageName(lang: LanguageOption): string {
+    return lang.name;
+  }
+
   selectLanguage(language: AppLanguage): void {
     this.settingsService.setLanguage(language);
+    this.translationService.setLanguage(language);
     localStorage.setItem('firstVisit', 'false');
     this.router.navigate(['/home']);
   }

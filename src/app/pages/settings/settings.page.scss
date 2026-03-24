@@ -38,12 +38,12 @@
   border-radius: var(--border-radius);
   padding: 16px;
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--text-secondary);
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
   }
 
   .label {
@@ -61,10 +61,14 @@
   }
 
   &.total {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--surface);
+    border: 2px solid var(--primary);
     
-    .label, .value {
-      color: white;
+    .label {
+      color: var(--text-secondary);
+    }
+    .value {
+      color: var(--primary);
     }
   }
 
@@ -108,16 +112,17 @@
     margin-bottom: 12px;
     --padding-start: 16px;
     --padding-end: 16px;
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--text-secondary);
     transition: all 0.3s ease;
 
     &:hover {
       transform: translateX(4px);
-      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
     }
 
     ion-label {
       font-weight: 500;
+      color: var(--text);
     }
   }
 }
@@ -126,7 +131,7 @@
   background: var(--surface);
   border-radius: var(--border-radius);
   padding: 20px;
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--text-secondary);
   animation: fadeIn 0.5s ease-out;
   animation-delay: 0.4s;
   animation-fill-mode: both;

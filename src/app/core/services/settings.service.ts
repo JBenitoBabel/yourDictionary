@@ -7,7 +7,7 @@ const STORAGE_KEY = 'yourDictionary_settings';
 const DEFAULT_SETTINGS: UserSettings = {
   language: 'es',
   fontSize: 'medium',
-  difficulty: 'medium',
+  difficulty: 'easy',
   theme: 'light'
 };
 

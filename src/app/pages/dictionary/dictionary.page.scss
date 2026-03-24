@@ -53,10 +53,11 @@
   --padding-end: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 1px solid var(--text-secondary);
 
   &:hover {
     transform: translateX(4px);
-    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
   }
 
   .word-content {
@@ -138,7 +139,7 @@
   right: 0;
   background: var(--surface);
   padding: 16px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--text-secondary);
   animation: slideIn 0.5s ease-out;
   z-index: 100;
 

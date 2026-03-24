@@ -33,6 +33,7 @@
   --surface: #ffffff;
   --text: #333333;
   --text-secondary: #666666;
+  --text-on-primary: #ffffff;
   
   // Font sizes
   --font-size-small: 14px;
@@ -42,11 +43,6 @@
   // Border radius
   --border-radius: 12px;
   --border-radius-lg: 20px;
-  
-  // Shadows
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] {
@@ -79,13 +75,10 @@
   --surface: #2D2D2D;
   --text: #F5F5F5;
   --text-secondary: #AAAAAA;
-  
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --text-on-primary: #000000;
 }
 
-// Font size variants
+// Font size variants - apply to html
 [data-font-size="small"] {
   --font-size-small: 12px;
   --font-size-medium: 14px;

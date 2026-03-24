@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { ThemeService } from './core/services/theme.service';
+import { TranslationService } from './core/services/translation.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { ThemeService } from './core/services/theme.service';
 export class AppComponent implements OnInit {
   private router = inject(Router);
   private themeService = inject(ThemeService);
+  private translationService = inject(TranslationService);
 
   ngOnInit(): void {
     const settings = localStorage.getItem('yourDictionary_settings');
@@ -19,6 +21,7 @@ export class AppComponent implements OnInit {
       const parsed = JSON.parse(settings);
       this.themeService.setTheme(parsed.theme || 'light');
       this.themeService.setFontSize(parsed.fontSize || 'medium');
+      this.translationService.setLanguage(parsed.language || 'es');
     }
 
     const firstVisit = localStorage.getItem('firstVisit');

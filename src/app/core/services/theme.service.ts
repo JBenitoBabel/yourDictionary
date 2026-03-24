@@ -20,16 +20,19 @@ export class ThemeService {
     effect(() => {
       const fontSize = this.fontSizeSignal();
       document.documentElement.setAttribute('data-font-size', fontSize);
-      document.body.style.fontSize = this.getFontSizeValue(fontSize);
+      const root = document.documentElement;
+      switch (fontSize) {
+        case 'small':
+          root.style.fontSize = '14px';
+          break;
+        case 'medium':
+          root.style.fontSize = '16px';
+          break;
+        case 'large':
+          root.style.fontSize = '18px';
+          break;
+      }
     });
-  }
-
-  private getFontSizeValue(size: FontSize): string {
-    switch (size) {
-      case 'small': return '14px';
-      case 'medium': return '16px';
-      case 'large': return '18px';
-    }
   }
 
   getTheme(): Theme {

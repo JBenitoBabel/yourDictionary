@@ -24,10 +24,16 @@ html, body {
   --primary: var(--primary);
   --secondary: var(--secondary);
   --accent: var(--accent);
+  --text-on-primary: var(--text-on-primary);
   
   font-family: var(--ion-font-family);
   background: var(--background);
   color: var(--text);
+  font-size: var(--font-size-medium);
+}
+
+html {
+  font-size: var(--font-size-medium);
 }
 
 // Global Styles
@@ -42,7 +48,17 @@ ion-content {
 ion-card {
   --background: var(--surface);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--text-secondary);
+}
+
+ion-toolbar {
+  --background: var(--surface);
+  --border-width: 0 0 1px 0;
+  --border-color: var(--text-secondary);
+}
+
+ion-header {
+  --background: var(--surface);
 }
 
 ion-button {
@@ -52,9 +68,36 @@ ion-button {
   --transition: all 0.3s ease;
 }
 
-ion-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+ion-title {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+ion-list {
+  --background: transparent;
+}
+
+ion-item {
+  --background: var(--surface);
+  --border-radius: var(--border-radius);
+  --border-width: 0 0 1px 0;
+  --border-color: var(--text-secondary);
+  color: var(--text);
+}
+
+ion-label {
+  color: var(--text);
+}
+
+ion-select, ion-input {
+  --color: var(--text);
+  color: var(--text);
+}
+
+ion-searchbar {
+  --background: var(--surface);
+  --color: var(--text);
+  --placeholder-color: var(--text-secondary);
 }
 
 // Animations
@@ -84,11 +127,6 @@ ion-button:hover {
   50% { transform: translateY(-10px); }
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .fade-in {
   animation: fadeIn 0.5s ease-out;
 }
@@ -99,10 +137,6 @@ ion-button:hover {
 
 .pulse {
   animation: pulse 2s infinite;
-}
-
-.shake {
-  animation: shake 0.5s ease-in-out;
 }
 
 // Flip Card Enhancements
@@ -124,10 +158,6 @@ ion-button:hover {
 
 .flip-card-inner.flipped {
   transform: rotateY(180deg);
-}
-
-.flip-card:hover .flip-card-inner {
-  box-shadow: var(--shadow-lg);
 }
 
 // Quiz Card Styles
@@ -161,52 +191,42 @@ ion-fab:hover {
 
 ion-fab-button {
   --background: var(--primary);
-  --color: white;
-  box-shadow: var(--shadow-lg);
+  --color: var(--text-on-primary);
 }
 
 // Header Styles
-ion-header {
-  ion-toolbar {
-    --background: var(--surface);
-    --border-width: 0;
-    box-shadow: var(--shadow-sm);
-  }
-  
-  ion-title {
-    font-weight: 700;
-    color: var(--primary);
-  }
+ion-header ion-toolbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--text-secondary);
+}
+
+ion-header ion-title {
+  color: var(--primary);
+  font-weight: 800;
 }
 
 // List Item Styles
 ion-item {
-  --background: var(--surface);
-  --border-radius: var(--border-radius);
+  background: var(--surface);
+  border-radius: var(--border-radius);
   margin-bottom: 8px;
-  --padding-start: 16px;
-  --padding-end: 16px;
   transition: all 0.3s ease;
 }
 
 ion-item:hover {
   transform: translateX(4px);
-  box-shadow: var(--shadow-sm);
 }
 
 // Input Styles
 ion-input, ion-select, ion-textarea {
   --background: var(--surface);
-  --border-radius: var(--border-radius);
-  --padding-start: 16px;
-  --padding-end: 16px;
+  border-radius: var(--border-radius);
   border: 1px solid var(--text-secondary);
   margin-bottom: 16px;
 }
 
 ion-input:focus, ion-select:focus, ion-textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
 }
 
 // Segment Styles
@@ -216,7 +236,7 @@ ion-segment {
 
 ion-segment-button {
   --background-checked: var(--primary);
-  --color-checked: white;
+  --color-checked: var(--text-on-primary);
   --indicator-color: transparent;
   border-radius: var(--border-radius);
   margin: 4px;
@@ -304,4 +324,33 @@ ion-toast {
 // Safe Area Padding
 ion-content {
   --padding-bottom: env(safe-area-inset-bottom);
+}
+
+// Text colors for better contrast
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+}
+
+p, span, div {
+  color: var(--text);
+}
+
+// On primary color elements
+.on-primary {
+  color: var(--text-on-primary);
+}
+
+// Ion segment button text
+.segment-button {
+  color: var(--text);
+}
+
+// Back button
+ion-back-button {
+  color: var(--primary);
+}
+
+// Select popover
+.popover-content {
+  background: var(--surface);
 }
