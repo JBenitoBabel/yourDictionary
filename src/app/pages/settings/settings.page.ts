@@ -38,6 +38,9 @@ export class SettingsPage implements OnInit {
     this.difficulty.set(settings.difficulty);
     this.theme.set(settings.theme);
 
+    this.themeService.setFontSize(settings.fontSize);
+    this.themeService.setTheme(settings.theme);
+
     this.totalPoints = this.pointsService.getPoints();
     this.weeklyBest = this.pointsService.getWeeklyBest();
     this.monthlyBest = this.pointsService.getMonthlyBest();
@@ -46,6 +49,7 @@ export class SettingsPage implements OnInit {
   onFontSizeChange(event: any) {
     const value = event.detail.value;
     this.fontSize.set(value);
+    this.themeService.setFontSize(value);
     this.settingsService.updateSettings({ fontSize: value });
   }
 

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,16 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 })
 export class AppComponent implements OnInit {
   private router = inject(Router);
+  private themeService = inject(ThemeService);
 
   ngOnInit(): void {
+    const settings = localStorage.getItem('yourDictionary_settings');
+    if (settings) {
+      const parsed = JSON.parse(settings);
+      this.themeService.setTheme(parsed.theme || 'light');
+      this.themeService.setFontSize(parsed.fontSize || 'medium');
+    }
+
     const firstVisit = localStorage.getItem('firstVisit');
     if (firstVisit === null || firstVisit === 'true') {
       this.router.navigate(['/onboarding']);
