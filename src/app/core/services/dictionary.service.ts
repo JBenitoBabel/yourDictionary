@@ -25,7 +25,9 @@ export class DictionaryService {
   private loadCategories(): string[] {
     const words = this.wordsSignal();
     const cats = [...new Set(words.map(w => w.category))];
-    return cats.length > 0 ? cats : ['General'];
+    const defaultCats = ['Verbos', 'Expresiones', 'Deporte'];
+    const allCats = [...new Set([...defaultCats, ...cats])];
+    return allCats;
   }
 
   getWords(): Word[] {
@@ -51,10 +53,11 @@ export class DictionaryService {
     return words[randomIndex];
   }
 
-  addWord(word: Omit<Word, 'id' | 'createdAt'>): void {
+  addWord(word: Omit<Word, 'id' | 'createdAt' | 'status'>): void {
     const newWord: Word = {
       ...word,
       id: crypto.randomUUID(),
+      status: 'normal',
       createdAt: Date.now()
     };
     this.wordsSignal.update(words => [...words, newWord]);
