@@ -2,18 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 16px;
-  background: var(--primary);
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.5s ease-out;
 
   .points-label {
     font-size: 1.1rem;
+    font-weight: 500;
   }
 
   .points-value {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -21,106 +25,174 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .action-card {
-  background: var(--ion-card-background);
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
 
   &:active {
     transform: scale(0.98);
   }
 
   ion-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--primary);
+    animation: bounce 2s infinite;
   }
 
   p {
-    margin: 8px 0;
-    font-weight: 500;
+    margin: 12px 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
   }
 
   .cost {
     font-size: 0.9rem;
     color: var(--secondary);
+    font-weight: 500;
   }
 }
 
 .claim-card {
-  background: linear-gradient(135deg, var(--bg-light) 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--surface), var(--accent));
+  border: 2px solid var(--accent);
+  
+  &:hover {
+    border-color: var(--primary);
+  }
 }
 
 .empty-state {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 60vh;
   padding: 32px;
   text-align: center;
-  color: var(--ion-color-medium);
+  animation: fadeIn 0.5s ease-out;
+
+  ion-icon {
+    font-size: 80px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
 }
 
 .quiz-content {
-  padding: 16px;
+  padding: 20px;
+  --background: var(--background);
 
   .quiz-question {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    animation: fadeIn 0.5s ease-out;
 
     h2 {
-      color: var(--ion-color-medium);
+      color: var(--text-secondary);
       font-size: 1rem;
+      font-weight: 500;
     }
 
     .word-to-translate {
-      font-size: 1.8rem;
-      font-weight: bold;
+      font-size: 2.5rem;
+      font-weight: 800;
       color: var(--primary);
-      margin-top: 8px;
+      margin-top: 12px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
 
+  ion-list {
+    background: transparent;
+  }
+
   ion-item {
-    margin-bottom: 8px;
-    border-radius: 8px;
+    --background: var(--surface);
+    --border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover:not(.disabled) {
+      --background: var(--primary);
+      --color: white;
+      transform: translateX(4px);
+    }
 
     &.correct {
-      --background: rgba(0, 255, 0, 0.1);
-      border: 1px solid var(--ion-color-success);
+      --background: rgba(45, 211, 111, 0.15);
+      border: 2px solid var(--ion-color-success);
+      --color: var(--ion-color-success);
     }
 
     &.incorrect {
-      --background: rgba(255, 0, 0, 0.1);
-      border: 1px solid var(--ion-color-danger);
+      --background: rgba(235, 68, 90, 0.15);
+      border: 2px solid var(--ion-color-danger);
+      --color: var(--ion-color-danger);
+      animation: shake 0.5s ease-in-out;
     }
 
     &.disabled {
       pointer-events: none;
       opacity: 0.7;
     }
+
+    ion-label {
+      font-size: 1.1rem;
+    }
   }
 
   .quiz-result {
     text-align: center;
-    padding: 16px;
-    border-radius: 8px;
-    margin-top: 16px;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s ease-out;
 
     &.correct {
-      background: rgba(0, 255, 0, 0.1);
+      background: linear-gradient(135deg, rgba(45, 211, 111, 0.2), rgba(45, 211, 111, 0.1));
       color: var(--ion-color-success);
+      border: 2px solid var(--ion-color-success);
     }
 
     &.incorrect {
-      background: rgba(255, 0, 0, 0.1);
+      background: linear-gradient(135deg, rgba(235, 68, 90, 0.2), rgba(235, 68, 90, 0.1));
       color: var(--ion-color-danger);
+      border: 2px solid var(--ion-color-danger);
     }
+  }
+}
+
+// Responsive adjustments
+@media (min-width: 768px) {
+  .cards-container {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }

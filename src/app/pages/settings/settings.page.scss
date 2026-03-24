@@ -1,0 +1,169 @@
+.settings-content {
+  --background: var(--background);
+}
+
+.settings-container {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.points-section {
+  margin-bottom: 24px;
+  animation: fadeIn 0.5s ease-out;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+
+    ion-icon {
+      color: var(--accent);
+    }
+  }
+}
+
+.points-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.point-card {
+  background: var(--surface);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  &.total {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    
+    .label, .value {
+      color: white;
+    }
+  }
+
+  &.weekly .value {
+    color: var(--accent);
+  }
+
+  &.monthly .value {
+    color: var(--secondary);
+  }
+}
+
+.config-section {
+  margin-bottom: 24px;
+  animation: fadeIn 0.5s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+
+    ion-icon {
+      color: var(--primary);
+    }
+  }
+
+  ion-list {
+    background: transparent;
+    padding: 0;
+  }
+
+  ion-item {
+    --background: var(--surface);
+    --border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    ion-label {
+      font-weight: 500;
+    }
+  }
+}
+
+.info-section {
+  background: var(--surface);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.5s ease-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: both;
+
+  p {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+// Responsive
+@media (min-width: 768px) {
+  .settings-container {
+    padding: 24px;
+  }
+
+  .points-grid {
+    gap: 16px;
+  }
+
+  .point-card {
+    padding: 24px;
+
+    .value {
+      font-size: 2rem;
+    }
+  }
+}

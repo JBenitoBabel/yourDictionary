@@ -1,13 +1,80 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="settings-content">
+  <div class="settings-container">
+    <!-- Puntos -->
+    <div class="points-section">
+      <h2><ion-icon name="trophy"></ion-icon> Tus Puntos</h2>
+      <div class="points-grid">
+        <div class="point-card total">
+          <span class="label">Total</span>
+          <span class="value">{{ totalPoints }}</span>
+        </div>
+        <div class="point-card weekly">
+          <span class="label">Mejor Semana</span>
+          <span class="value">{{ weeklyBest }}</span>
+        </div>
+        <div class="point-card monthly">
+          <span class="label">Mejor Mes</span>
+          <span class="value">{{ monthlyBest }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configuración -->
+    <div class="config-section">
+      <h2><ion-icon name="settings"></ion-icon> Preferencias</h2>
+
+      <ion-list>
+        <!-- Tamaño de fuente -->
+        <ion-item>
+          <ion-icon slot="start" name="text" color="primary"></ion-icon>
+          <ion-label>Tamaño de letra</ion-label>
+          <ion-select [value]="fontSize()" (ionChange)="onFontSizeChange($event)" interface="popover">
+            <ion-select-option value="small">Pequeño</ion-select-option>
+            <ion-select-option value="medium">Mediano</ion-select-option>
+            <ion-select-option value="large">Grande</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Dificultad -->
+        <ion-item>
+          <ion-icon slot="start" name="easel-outline" color="secondary"></ion-icon>
+          <ion-label>Dificultad del quiz</ion-label>
+          <ion-select [value]="difficulty()" (ionChange)="onDifficultyChange($event)" interface="popover">
+            <ion-select-option value="easy">Fácil (3 opciones)</ion-select-option>
+            <ion-select-option value="medium">Medio (4 opciones)</ion-select-option>
+            <ion-select-option value="hard">Difícil (5 opciones)</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Tema -->
+        <ion-item>
+          <ion-icon slot="start" [name]="theme() === 'dark' ? 'moon' : 'sunny'" color="tertiary"></ion-icon>
+          <ion-label>Tema</ion-label>
+          <ion-select [value]="theme()" (ionChange)="onThemeChange($event)" interface="popover">
+            <ion-select-option value="light">Claro</ion-select-option>
+            <ion-select-option value="dark">Oscuro</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Info -->
+    <div class="info-section">
+      <p>¡Gana puntos каждый día!</p>
+      <ul>
+        <li>Entrar en la app: 1-5 puntos</li>
+        <li>Añadir palabra: +1 punto</li>
+        <li>Quiz acertado: 3-5 puntos</li>
+      </ul>
+    </div>
+  </div>
 </ion-content>
