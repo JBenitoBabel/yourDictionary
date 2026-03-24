@@ -1,24 +1,16 @@
-.settings-content {
-  --background: var(--background);
-}
-
+// Settings Page Styles
 .settings-container {
   padding: 16px;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .points-section {
   margin-bottom: 24px;
-  animation: fadeIn 0.5s ease-out;
 
   h2 {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
     margin-bottom: 16px;
 
     ion-icon {
@@ -39,12 +31,6 @@
   padding: 16px;
   text-align: center;
   border: 1px solid var(--text-secondary);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-  }
 
   .label {
     display: block;
@@ -61,15 +47,7 @@
   }
 
   &.total {
-    background: var(--surface);
     border: 2px solid var(--primary);
-    
-    .label {
-      color: var(--text-secondary);
-    }
-    .value {
-      color: var(--primary);
-    }
   }
 
   &.weekly .value {
@@ -83,17 +61,12 @@
 
 .config-section {
   margin-bottom: 24px;
-  animation: fadeIn 0.5s ease-out;
-  animation-delay: 0.2s;
-  animation-fill-mode: both;
 
   h2 {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
     margin-bottom: 16px;
 
     ion-icon {
@@ -101,29 +74,8 @@
     }
   }
 
-  ion-list {
-    background: transparent;
-    padding: 0;
-  }
-
   ion-item {
-    --background: var(--surface);
-    --border-radius: var(--border-radius);
     margin-bottom: 12px;
-    --padding-start: 16px;
-    --padding-end: 16px;
-    border: 1px solid var(--text-secondary);
-    transition: all 0.3s ease;
-
-    &:hover {
-      transform: translateX(4px);
-      border-color: var(--primary);
-    }
-
-    ion-label {
-      font-weight: 500;
-      color: var(--text);
-    }
   }
 }
 
@@ -132,13 +84,9 @@
   border-radius: var(--border-radius);
   padding: 20px;
   border: 1px solid var(--text-secondary);
-  animation: fadeIn 0.5s ease-out;
-  animation-delay: 0.4s;
-  animation-fill-mode: both;
 
   p {
     font-weight: 600;
-    color: var(--text);
     margin-bottom: 12px;
   }
 
@@ -150,25 +98,6 @@
 
     li {
       margin-bottom: 6px;
-    }
-  }
-}
-
-// Responsive
-@media (min-width: 768px) {
-  .settings-container {
-    padding: 24px;
-  }
-
-  .points-grid {
-    gap: 16px;
-  }
-
-  .point-card {
-    padding: 24px;
-
-    .value {
-      font-size: 2rem;
     }
   }
 }

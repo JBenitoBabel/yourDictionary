@@ -1,3 +1,4 @@
+// Home Page Styles
 .points-display {
   display: flex;
   justify-content: center;
@@ -6,12 +7,11 @@
   padding: 20px;
   background: var(--surface);
   border-bottom: 2px solid var(--primary);
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.3s ease-out;
 
   .points-label {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text);
   }
 
   .points-value {
@@ -25,7 +25,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .action-card {
@@ -33,14 +33,9 @@
   border-radius: var(--border-radius-lg);
   padding: 24px;
   text-align: center;
-  border: 1px solid var(--text-secondary);
   cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary);
-  }
+  transition: all 0.2s ease;
+  border: 1px solid var(--text-secondary);
 
   &:active {
     transform: scale(0.98);
@@ -49,30 +44,21 @@
   ion-icon {
     font-size: 2.5rem;
     color: var(--primary);
-    animation: bounce 2s infinite;
   }
 
   p {
     margin: 12px 0;
     font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text);
   }
 
   .cost {
     font-size: 0.9rem;
     color: var(--secondary);
-    font-weight: 500;
   }
 }
 
 .claim-card {
-  background: var(--surface);
   border: 2px solid var(--accent);
-  
-  &:hover {
-    border-color: var(--primary);
-  }
 }
 
 .empty-state {
@@ -80,108 +66,61 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 50vh;
   padding: 32px;
   text-align: center;
-  animation: fadeIn 0.5s ease-out;
-
-  ion-icon {
-    font-size: 80px;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-    opacity: 0.5;
-  }
 
   p {
-    font-size: 1.2rem;
     color: var(--text-secondary);
-    line-height: 1.6;
   }
 }
 
 .quiz-content {
   padding: 20px;
-  --background: var(--background);
 
   .quiz-question {
     text-align: center;
-    margin-bottom: 32px;
-    animation: fadeIn 0.5s ease-out;
+    margin-bottom: 24px;
 
     h2 {
-      color: var(--text-secondary);
       font-size: 1rem;
-      font-weight: 500;
+      color: var(--text-secondary);
     }
 
     .word-to-translate {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--primary);
-      margin-top: 12px;
+      margin-top: 8px;
     }
-  }
-
-  ion-list {
-    background: transparent;
   }
 
   ion-item {
-    --background: var(--surface);
-    --border-radius: var(--border-radius);
     margin-bottom: 12px;
-    --padding-start: 20px;
-    --padding-end: 20px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 1px solid var(--text-secondary);
-
-    &:hover:not(.disabled) {
-      --background: var(--primary);
-      --color: var(--text-on-primary);
-      transform: translateX(4px);
-    }
-
+    
     &.correct {
-      --background: rgba(45, 211, 111, 0.15);
-      border: 2px solid var(--ion-color-success);
+      --background: rgba(45, 211, 111, 0.2);
     }
 
     &.incorrect {
-      --background: rgba(235, 68, 90, 0.15);
-      border: 2px solid var(--ion-color-danger);
-      animation: shake 0.5s ease-in-out;
-    }
-
-    &.disabled {
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    ion-label {
-      font-size: 1.1rem;
+      --background: rgba(235, 68, 90, 0.2);
     }
   }
 
   .quiz-result {
     text-align: center;
-    padding: 20px;
+    padding: 16px;
     border-radius: var(--border-radius);
-    margin-top: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    animation: fadeIn 0.5s ease-out;
+    margin-top: 16px;
 
     &.correct {
-      background: rgba(45, 211, 111, 0.15);
+      background: rgba(45, 211, 111, 0.2);
       color: var(--ion-color-success);
-      border: 2px solid var(--ion-color-success);
     }
 
     &.incorrect {
-      background: rgba(235, 68, 90, 0.15);
+      background: rgba(235, 68, 90, 0.2);
       color: var(--ion-color-danger);
-      border: 2px solid var(--ion-color-danger);
     }
   }
 }
@@ -189,31 +128,9 @@
 // Footer
 .home-footer {
   padding: 16px;
-  padding-bottom: 80px;
 }
 
 .footer-btn {
-  --border-radius: var(--border-radius);
-  font-weight: 600;
-  height: 50px;
-  font-size: 1rem;
-}
-
-.dictionary-btn {
   --background: var(--primary);
   --color: var(--text-on-primary);
-}
-
-// FAB naranja
-.orange-fab {
-  --background: var(--primary);
-  --color: var(--text-on-primary);
-}
-
-// Responsive adjustments
-@media (min-width: 768px) {
-  .cards-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
 }

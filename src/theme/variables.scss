@@ -1,39 +1,35 @@
-// Ionic Theme Variables
+// Ionic Theme Variables - yourDictionary
+// ================================
+
 :root {
+  // Ionic Colors
   --ion-color-primary: #FF6B35;
   --ion-color-primary-rgb: 255, 107, 53;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #e05c2f;
-  --ion-color-primary-tint: #ff7a49;
+  --ion-color-primary-rgb: 255, 255, 255;
 
   --ion-color-secondary: #F7931A;
   --ion-color-secondary-rgb: 247, 147, 26;
   --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #d98117;
-  --ion-color-secondary-tint: #f89e31;
+  --ion-color-secondary-rgb: 255, 255, 255;
 
   --ion-color-tertiary: #FFD23F;
   --ion-color-tertiary-rgb: 255, 210, 63;
   --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #e0b837;
-  --ion-color-tertiary-tint: #ffd752;
 
   --ion-color-success: #2dd36f;
   --ion-color-warning: #ffc409;
   --ion-color-danger: #eb445a;
 
-  // Custom CSS Variables
+  // Custom Colors - Light Theme
   --primary: #FF6B35;
   --secondary: #F7931A;
   --accent: #FFD23F;
-  --background: #FFF8F0;
-  --surface: #ffffff;
-  --text: #333333;
+  --background: #FFFFFF;
+  --surface: #F8F8F8;
+  --text: #1A1A1A;
   --text-secondary: #666666;
-  --text-on-primary: #ffffff;
+  --text-on-primary: #FFFFFF;
   
   // Font sizes
   --font-size-small: 14px;
@@ -42,43 +38,35 @@
   
   // Border radius
   --border-radius: 12px;
-  --border-radius-lg: 20px;
+  --border-radius-lg: 16px;
 }
 
+// Dark Theme
 [data-theme="dark"] {
   --ion-color-primary: #FF8C5A;
   --ion-color-primary-rgb: 255, 140, 90;
   --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #e07b4f;
-  --ion-color-primary-tint: #ff986b;
 
   --ion-color-secondary: #FFA540;
   --ion-color-secondary-rgb: 255, 165, 64;
   --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #e09138;
-  --ion-color-secondary-tint: #ffae54;
 
   --ion-color-tertiary: #FFE066;
   --ion-color-tertiary-rgb: 255, 224, 102;
   --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #e0c55a;
-  --ion-color-tertiary-tint: #ffe377;
 
-  // Custom CSS Variables - Dark
+  // Custom Colors - Dark
   --primary: #FF8C5A;
   --secondary: #FFA540;
   --accent: #FFE066;
-  --background: #1A1A1A;
-  --surface: #2D2D2D;
-  --text: #F5F5F5;
-  --text-secondary: #AAAAAA;
+  --background: #121212;
+  --surface: #1E1E1E;
+  --text: #FFFFFF;
+  --text-secondary: #B0B0B0;
   --text-on-primary: #000000;
 }
 
-// Font size variants - apply to html
+// Font size variants
 [data-font-size="small"] {
   --font-size-small: 12px;
   --font-size-medium: 14px;

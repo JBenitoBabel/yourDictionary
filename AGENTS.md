@@ -248,3 +248,72 @@ El agente **Setup** debe:
    git commit -m "[Setup] Estructura base del proyecto"
    git push -u origin dev
    ```
+
+---
+
+# UI/UX Guidelines
+
+## Objetivo
+La aplicación debe tener un diseño moderno, limpio y usable, priorizando mobile-first.
+
+## Principios
+- Simplicidad sobre complejidad
+- Consistencia visual en toda la app
+- Jerarquía clara (títulos, contenido, acciones)
+- Acciones importantes destacadas
+- Espaciado generoso
+
+## Layout
+- Usar spacing basado en múltiplos de 8px
+- Evitar elementos pegados a bordes
+- Usar cards con padding uniforme (16px–24px)
+- Evitar scrolls internos innecesarios
+- Siempre añadir padding-bottom adecuado en ion-content para evitar superposiciones con elementos fixed
+
+## Tipografía
+- Tamaños recomendados:
+  - Título: 20–24px
+  - Subtítulo: 16–18px
+  - Texto: 14–16px
+- Usar máximo 2 pesos de fuente
+
+## Colores
+- Definir variables CSS:
+  - primary
+  - secondary
+  - background
+  - surface
+  - text (para texto principal)
+  - text-secondary (para texto secundario)
+  - text-on-primary (para texto sobre color primario)
+- Asegurar contraste accesible (WCAG AA mínimo)
+
+## Componentes
+### Botones
+- Altura mínima: 44px
+- Bordes redondeados (8px–12px)
+- Estados: hover, active, disabled
+- Usar siempre colores primary para acciones principales
+
+### Cards
+- Border-radius: 12px–16px
+- Padding: 16px–24px
+- Fondo: var(--surface)
+
+### Inputs
+- Altura mínima: 44px
+- Labels claros
+- Bordes consistentes
+
+## Ionic
+- Respetar variables de Ionic (`--ion-color-*`)
+- No sobreescribir estilos base sin necesidad
+- Usar componentes Ionic como base
+- Forzar colores con CSS variables en todos los elementos
+
+## Buenas prácticas
+- No usar estilos inline
+- Reutilizar clases
+- Evitar duplicación de SCSS
+- Usar variables y mixins
+- Definir estilos comunes en global.scss

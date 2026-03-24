@@ -1,12 +1,6 @@
-.add-word-content {
-  --background: var(--background);
-}
-
+// Add Word Page Styles
 .form-container {
   padding: 24px 16px;
-  max-width: 600px;
-  margin: 0 auto;
-  animation: fadeIn 0.5s ease-out;
 }
 
 .form-header {
@@ -14,57 +8,23 @@
   margin-bottom: 32px;
 
   ion-icon {
-    font-size: 64px;
+    font-size: 56px;
     color: var(--primary);
-    margin-bottom: 12px;
   }
 
   h2 {
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text);
-    margin: 0 0 8px;
+    margin: 16px 0 8px;
   }
 
   p {
-    font-size: 1rem;
     color: var(--text-secondary);
-    margin: 0;
   }
 }
 
 .word-form {
-  background: transparent;
-  padding: 0;
-
   ion-item {
-    --background: var(--surface);
-    --border-radius: var(--border-radius);
     margin-bottom: 16px;
-    --padding-start: 16px;
-    --padding-end: 16px;
-    border: 1px solid var(--text-secondary);
-    transition: all 0.3s ease;
-
-    &:hover {
-      border-color: var(--primary);
-    }
-
-    ion-label {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    ion-input, ion-select {
-      --padding-start: 8px;
-      font-size: 1rem;
-    }
-  }
-
-  .new-category-item {
-    animation: slideIn 0.3s ease-out;
-    --background: rgba(255, 107, 53, 0.05);
-    border: 1px solid var(--primary);
   }
 }
 
@@ -76,42 +36,12 @@
     font-size: 0.9rem;
     color: var(--text-secondary);
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    &::before {
-      content: '★';
-      color: var(--accent);
-    }
   }
 
   .submit-btn {
     --background: var(--primary);
     --color: var(--text-on-primary);
-    --border-radius: var(--border-radius);
-    font-weight: 700;
     height: 56px;
     font-size: 1.1rem;
-    --transition: all 0.3s ease;
-
-    &:hover:not([disabled]) {
-      transform: translateY(-2px);
-    }
-
-    &[disabled] {
-      opacity: 0.5;
-    }
   }
-}
-
-// Animation for form items
-.word-form ion-item {
-  animation: slideIn 0.4s ease-out backwards;
-  
-  &:nth-child(1) { animation-delay: 0.1s; }
-  &:nth-child(2) { animation-delay: 0.2s; }
-  &:nth-child(3) { animation-delay: 0.3s; }
-  &:nth-child(4) { animation-delay: 0.4s; }
 }
