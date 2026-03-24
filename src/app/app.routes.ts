@@ -26,16 +26,4 @@ export const routes: Routes = [
     path: 'dictionary',
     loadComponent: () => import('./pages/dictionary/dictionary.page').then( m => m.DictionaryPage)
   },
-  {
-    path: 'settings',
-    loadComponent: () => import('./pages/settings/settings.page').then( m => m.SettingsPage)
-  },
-  {
-    path: 'add-word',
-    loadComponent: () => import('./pages/add-word/add-word.page').then( m => m.AddWordPage)
-  },
-  {
-    path: 'dictionary',
-    loadComponent: () => import('./pages/dictionary/dictionary.page').then( m => m.DictionaryPage)
-  },
 ];

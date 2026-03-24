@@ -186,6 +186,30 @@
   }
 }
 
+// Footer
+.home-footer {
+  padding: 16px;
+  padding-bottom: 80px;
+}
+
+.footer-btn {
+  --border-radius: var(--border-radius);
+  font-weight: 600;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.dictionary-btn {
+  --background: var(--primary);
+  --color: var(--text-on-primary);
+}
+
+// FAB naranja
+.orange-fab {
+  --background: var(--primary);
+  --color: var(--text-on-primary);
+}
+
 // Responsive adjustments
 @media (min-width: 768px) {
   .cards-container {

@@ -41,8 +41,15 @@
     <app-quiz-card (startQuiz)="startQuiz()"></app-quiz-card>
   }
 
+  <div class="home-footer">
+    <ion-button expand="block" class="footer-btn dictionary-btn" (click)="goToDictionary()">
+      <ion-icon slot="start" name="book"></ion-icon>
+      Mi Diccionario
+    </ion-button>
+  </div>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="goToAddWord()">
+    <ion-fab-button (click)="goToAddWord()" class="orange-fab">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
