@@ -1,0 +1,74 @@
+.onboarding-content {
+  --background: linear-gradient(135deg, #fff5e6 0%, #ffe0b3 100%);
+}
+
+[data-theme="dark"] .onboarding-content {
+  --background: linear-gradient(135deg, #1a1a00 0%, #2d2400 100%);
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: var(--ion-color-secondary);
+  margin-bottom: 2rem;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.language-card {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+  border-radius: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.language-card:active {
+  transform: scale(0.95);
+}
+
+[data-theme="dark"] .language-card {
+  --background: var(--ion-color-primary-shade);
+}
+
+.language-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.language-flag {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.language-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-primary-contrast);
+}
