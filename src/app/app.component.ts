@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
@@ -6,6 +8,23 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet],
 })
-export class AppComponent {
-  constructor() {}
+export class AppComponent implements OnInit {
+  private router = inject(Router);
+
+  ngOnInit(): void {
+    const firstVisit = localStorage.getItem('firstVisit');
+    if (firstVisit === null || firstVisit === 'true') {
+      this.router.navigate(['/onboarding']);
+    }
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        const navEvent = event as NavigationEnd;
+        const firstVisit = localStorage.getItem('firstVisit');
+        if ((firstVisit === null || firstVisit === 'true') && navEvent.url !== '/onboarding') {
+          this.router.navigate(['/onboarding']);
+        }
+      });
+  }
 }
