@@ -1,37 +1,307 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+// CSS Variables Application
+html, body {
+  --background: var(--background);
+  --surface: var(--surface);
+  --text: var(--text);
+  --text-secondary: var(--text-secondary);
+  --primary: var(--primary);
+  --secondary: var(--secondary);
+  --accent: var(--accent);
+  
+  font-family: var(--ion-font-family);
+  background: var(--background);
+  color: var(--text);
+}
+
+// Global Styles
+body {
+  background: var(--background);
+}
+
+ion-content {
+  --background: var(--background);
+}
+
+ion-card {
+  --background: var(--surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+ion-button {
+  --border-radius: var(--border-radius);
+  font-weight: 600;
+  text-transform: none;
+  --transition: all 0.3s ease;
+}
+
+ion-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+// Flip Card Enhancements
+.flip-card {
+  width: 100%;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card:hover .flip-card-inner {
+  box-shadow: var(--shadow-lg);
+}
+
+// Quiz Card Styles
+.quiz-option {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.quiz-option:hover {
+  transform: scale(1.02);
+}
+
+.quiz-option.correct {
+  --background: var(--ion-color-success);
+  animation: pulse 0.5s ease-in-out;
+}
+
+.quiz-option.incorrect {
+  --background: var(--ion-color-danger);
+  animation: shake 0.5s ease-in-out;
+}
+
+// FAB Button
+ion-fab {
+  transition: transform 0.3s ease;
+}
+
+ion-fab:hover {
+  transform: scale(1.1);
+}
+
+ion-fab-button {
+  --background: var(--primary);
+  --color: white;
+  box-shadow: var(--shadow-lg);
+}
+
+// Header Styles
+ion-header {
+  ion-toolbar {
+    --background: var(--surface);
+    --border-width: 0;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  ion-title {
+    font-weight: 700;
+    color: var(--primary);
+  }
+}
+
+// List Item Styles
+ion-item {
+  --background: var(--surface);
+  --border-radius: var(--border-radius);
+  margin-bottom: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  transition: all 0.3s ease;
+}
+
+ion-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+// Input Styles
+ion-input, ion-select, ion-textarea {
+  --background: var(--surface);
+  --border-radius: var(--border-radius);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  border: 1px solid var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+ion-input:focus, ion-select:focus, ion-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+// Segment Styles
+ion-segment {
+  --background: var(--surface);
+}
+
+ion-segment-button {
+  --background-checked: var(--primary);
+  --color-checked: white;
+  --indicator-color: transparent;
+  border-radius: var(--border-radius);
+  margin: 4px;
+}
+
+// Toast Styles
+ion-toast {
+  --border-radius: var(--border-radius);
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state ion-icon {
+  font-size: 64px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+// Points Display
+.points-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+// Title Display
+.user-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Status Indicators
+.status-normal {
+  --indicator-color: var(--text-secondary);
+}
+
+.status-star {
+  --indicator-color: var(--accent);
+  color: var(--accent);
+}
+
+.status-important {
+  --indicator-color: var(--primary);
+  font-weight: bold;
+}
+
+// Scrollbar Styles
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+// Safe Area Padding
+ion-content {
+  --padding-bottom: env(safe-area-inset-bottom);
+}

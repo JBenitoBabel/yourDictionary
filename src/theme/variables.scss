@@ -1,48 +1,105 @@
-// For information on how to create your theme, please refer to:
-// https://ionicframework.com/docs/theming/
-
+// Ionic Theme Variables
 :root {
-  --ion-color-primary: #ff8c00;
-  --ion-color-primary-rgb: 255, 140, 0;
+  --ion-color-primary: #FF6B35;
+  --ion-color-primary-rgb: 255, 107, 53;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #e07b00;
-  --ion-color-primary-tint: #ff9819;
+  --ion-color-primary-shade: #e05c2f;
+  --ion-color-primary-tint: #ff7a49;
 
-  --ion-color-secondary: #ff6b00;
-  --ion-color-secondary-rgb: 255, 107, 0;
+  --ion-color-secondary: #F7931A;
+  --ion-color-secondary-rgb: 247, 147, 26;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #e05f00;
-  --ion-color-secondary-tint: #ff7a1a;
+  --ion-color-secondary-shade: #d98117;
+  --ion-color-secondary-tint: #f89e31;
 
-  --ion-color-tertiary: #ffaa00;
-  --ion-color-tertiary-rgb: 255, 170, 0;
+  --ion-color-tertiary: #FFD23F;
+  --ion-color-tertiary-rgb: 255, 210, 63;
   --ion-color-tertiary-contrast: #000000;
   --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #e09600;
-  --ion-color-tertiary-tint: #ffb31a;
+  --ion-color-tertiary-shade: #e0b837;
+  --ion-color-tertiary-tint: #ffd752;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-warning: #ffc409;
+  --ion-color-danger: #eb445a;
+
+  // Custom CSS Variables
+  --primary: #FF6B35;
+  --secondary: #F7931A;
+  --accent: #FFD23F;
+  --background: #FFF8F0;
+  --surface: #ffffff;
+  --text: #333333;
+  --text-secondary: #666666;
+  
+  // Font sizes
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+  
+  // Border radius
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  
+  // Shadows
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] {
-  --ion-color-primary: #ffa500;
-  --ion-color-primary-rgb: 255, 165, 0;
+  --ion-color-primary: #FF8C5A;
+  --ion-color-primary-rgb: 255, 140, 90;
   --ion-color-primary-contrast: #000000;
   --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #e09100;
-  --ion-color-primary-tint: #ffae33;
+  --ion-color-primary-shade: #e07b4f;
+  --ion-color-primary-tint: #ff986b;
 
-  --ion-color-secondary: #ff7f00;
-  --ion-color-secondary-rgb: 255, 127, 0;
+  --ion-color-secondary: #FFA540;
+  --ion-color-secondary-rgb: 255, 165, 64;
   --ion-color-secondary-contrast: #000000;
   --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #e07000;
-  --ion-color-secondary-tint: #ff8c1a;
+  --ion-color-secondary-shade: #e09138;
+  --ion-color-secondary-tint: #ffae54;
 
-  --ion-color-tertiary: #ffb700;
-  --ion-color-tertiary-rgb: 255, 183, 0;
+  --ion-color-tertiary: #FFE066;
+  --ion-color-tertiary-rgb: 255, 224, 102;
   --ion-color-tertiary-contrast: #000000;
   --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #e0a100;
-  --ion-color-tertiary-tint: #ffbf1a;
+  --ion-color-tertiary-shade: #e0c55a;
+  --ion-color-tertiary-tint: #ffe377;
+
+  // Custom CSS Variables - Dark
+  --primary: #FF8C5A;
+  --secondary: #FFA540;
+  --accent: #FFE066;
+  --background: #1A1A1A;
+  --surface: #2D2D2D;
+  --text: #F5F5F5;
+  --text-secondary: #AAAAAA;
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+// Font size variants
+[data-font-size="small"] {
+  --font-size-small: 12px;
+  --font-size-medium: 14px;
+  --font-size-large: 16px;
+}
+
+[data-font-size="medium"] {
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 18px;
+}
+
+[data-font-size="large"] {
+  --font-size-small: 16px;
+  --font-size-medium: 18px;
+  --font-size-large: 20px;
 }
