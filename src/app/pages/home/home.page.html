@@ -1,0 +1,100 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ title() }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToSettings()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="points-display">
+    <span class="points-label">Puntos:</span>
+    <span class="points-value">{{ points() }}</span>
+  </div>
+
+  @if (hasWords()) {
+    <div class="cards-container">
+      <app-word-card
+        [word]="wordOfTheDay()"
+        [isFlipped]="isFlipped()"
+        (flip)="flipCard()">
+      </app-word-card>
+
+      @if (canClaimWord()) {
+        <div class="action-card claim-card" (click)="claimNewWord()">
+          <ion-icon name="language"></ion-icon>
+          <p>Reclamar otra palabra</p>
+          <span class="cost">-{{ COST_CLAIM_WORD }} puntos</span>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <p>Añade palabras a tu diccionario para comenzar</p>
+    </div>
+  }
+
+  @if (hasEnoughWordsForQuiz()) {
+    <app-quiz-card (startQuiz)="startQuiz()"></app-quiz-card>
+  }
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddWord()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal [isOpen]="showQuizModal()" (didDismiss)="closeQuiz()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Quiz</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeQuiz()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="quiz-content">
+        @if (currentQuiz(); as quiz) {
+          <div class="quiz-question">
+            <h2>¿Cuál es la traducción de?</h2>
+            <p class="word-to-translate">{{ quiz.word.original }}</p>
+          </div>
+
+          <ion-list>
+            @for (option of quiz.options; track option) {
+              <ion-item
+                [class.correct]="quizAnswered() && option === quiz.correctAnswer"
+                [class.incorrect]="quizAnswered() && option === quiz.selectedAnswer && !quiz.isCorrect"
+                [class.disabled]="quizAnswered()"
+                (click)="selectAnswer(option)">
+                <ion-label>{{ option }}</ion-label>
+                @if (quizAnswered() && option === quiz.correctAnswer) {
+                  <ion-icon slot="end" name="checkmark" color="success"></ion-icon>
+                }
+                @if (quizAnswered() && option === quiz.selectedAnswer && !quiz.isCorrect) {
+                  <ion-icon slot="end" name="close" color="danger"></ion-icon>
+                }
+              </ion-item>
+            }
+          </ion-list>
+
+          @if (quizAnswered()) {
+            <div class="quiz-result" [class.correct]="quiz.isCorrect" [class.incorrect]="!quiz.isCorrect">
+              @if (quiz.isCorrect) {
+                <p>¡Correcto! +{{ getPointsByDifficulty(settingsService.getSettings().difficulty) }} puntos</p>
+              } @else {
+                <p>Incorrecto. La respuesta era: {{ quiz.correctAnswer }}</p>
+              }
+            </div>
+          }
+        }
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

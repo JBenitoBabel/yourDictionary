@@ -1,4 +1,4 @@
-import { Injectable, signal, inject } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 const STORAGE_KEY = 'yourDictionary_points';
 
