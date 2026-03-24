@@ -4,105 +4,93 @@
       <ion-back-button default-href="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Mi Diccionario</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="selectedCategory.set('all')">
-        <ion-icon slot="icon-only" name="book"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="dictionary-content">
-  <div class="search-container">
+  <div class="search-section">
     <ion-searchbar 
       [value]="searchQuery()" 
       (ionInput)="onSearchChange($event)"
-      placeholder="Buscar palabras..."
+      placeholder="Buscar..."
       show-clear-button="always"
       (ionClear)="searchQuery.set('')">
     </ion-searchbar>
+    
+    <div class="filters-row">
+      <ion-select 
+        [value]="selectedCategory()" 
+        (ionChange)="onCategoryChange($event)"
+        interface="popover"
+        placeholder="Categoría">
+        @for (category of categories(); track category) {
+          <ion-select-option [value]="category">
+            {{ category === 'all' ? 'Todas' : category }}
+          </ion-select-option>
+        }
+      </ion-select>
+
+      <ion-select 
+        [value]="selectedStatus()" 
+        (ionChange)="onStatusChange($event)"
+        interface="popover"
+        placeholder="Estado">
+        <ion-select-option value="all">Todos</ion-select-option>
+        <ion-select-option value="normal">Normal</ion-select-option>
+        <ion-select-option value="star">★ Estrella</ion-select-option>
+        <ion-select-option value="important">★ Importante</ion-select-option>
+      </ion-select>
+    </div>
   </div>
 
-  <div class="filters-container">
-    <ion-select 
-      [value]="selectedCategory()" 
-      (ionChange)="onCategoryChange($event)"
-      interface="popover"
-      placeholder="Categoría">
-      @for (category of categories(); track category) {
-        <ion-select-option [value]="category">
-          {{ category === 'all' ? 'Todas' : category }}
-        </ion-select-option>
-      }
-    </ion-select>
-
-    <ion-select 
-      [value]="selectedStatus()" 
-      (ionChange)="onStatusChange($event)"
-      interface="popover"
-      placeholder="Estado">
-      <ion-select-option value="all">Todos</ion-select-option>
-      <ion-select-option value="normal">Normal</ion-select-option>
-      <ion-select-option value="star">Estrella</ion-select-option>
-      <ion-select-option value="important">Importante</ion-select-option>
-    </ion-select>
-  </div>
-
-  <div class="words-count">
+  <div class="results-info">
     <span>{{ filteredWords().length }} palabras</span>
   </div>
 
   @if (filteredWords().length === 0) {
     <div class="empty-state">
-      <ion-icon name="book"></ion-icon>
-      <h3>No hay palabras</h3>
-      <p>Añade palabras a tu diccionario para verlas aquí</p>
+      <ion-icon name="search-outline"></ion-icon>
+      <h3>Sin resultados</h3>
+      <p>Prueba con otros filtros</p>
     </div>
   } @else {
-    <ion-list class="words-list">
+    <div class="words-grid">
       @for (word of filteredWords(); track word.id) {
-        <ion-item class="word-item" (click)="cycleStatus(word)">
-          <div class="word-content">
-            <div class="word-main">
-              <span class="original">{{ word.original }}</span>
-              <span class="translation">{{ word.translation }}</span>
-            </div>
-            <div class="word-meta">
-              <ion-badge [color]="getStatusColor(word.status)" class="status-badge">
-                <ion-icon [name]="getStatusIcon(word.status)"></ion-icon>
-                {{ getStatusLabel(word.status) }}
-              </ion-badge>
-              <span class="category">{{ word.category }}</span>
-            </div>
+        <div class="word-card" (click)="cycleStatus(word)">
+          <div class="word-header">
+            <span class="status-dot" [class]="word.status"></span>
+            <span class="category-tag">{{ word.category }}</span>
+          </div>
+          <div class="word-body">
+            <span class="original">{{ word.original }}</span>
+            <span class="translation">{{ word.translation }}</span>
           </div>
           <ion-button 
             fill="clear" 
             color="danger" 
-            slot="end"
+            class="delete-btn"
             (click)="deleteWord(word); $event.stopPropagation()">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
           </ion-button>
-        </ion-item>
+        </div>
       }
-    </ion-list>
+    </div>
   }
 
-  <div class="footer-legend">
-    <h4>Leyenda:</h4>
-    <div class="legend-items">
-      <div class="legend-item">
-        <ion-icon name="book" color="medium"></ion-icon>
-        <span>Normal - Aparece en palabra del día y quiz</span>
-      </div>
-      <div class="legend-item">
-        <ion-icon name="star" color="warning"></ion-icon>
-        <span>Estrella - No aparece en palabra del día ni quiz</span>
-      </div>
-      <div class="legend-item">
-        <ion-icon name="flag" color="danger"></ion-icon>
-        <span>Importante - Aparece más veces para aprender</span>
-      </div>
+  <!-- Legend -->
+  <div class="legend-bar">
+    <div class="legend-item">
+      <span class="dot normal"></span>
+      <span>Normal</span>
     </div>
-    <p class="tip">Click en la palabra para cambiar su estado</p>
+    <div class="legend-item">
+      <span class="dot star"></span>
+      <span>★</span>
+    </div>
+    <div class="legend-item">
+      <span class="dot important"></span>
+      <span>!</span>
+    </div>
+    <span class="legend-tip">Toca para cambiar</span>
   </div>
 </ion-content>

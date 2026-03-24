@@ -2,7 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { settings, add, checkmark, close, language, book, list } from 'ionicons/icons';
+import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline } from 'ionicons/icons';
 import { DictionaryService } from '../../core/services/dictionary.service';
 import { PointsService } from '../../core/services/points.service';
 import { UserService } from '../../core/services/user.service';
@@ -69,7 +69,7 @@ export class HomePage {
   quizAnswered = signal(false);
 
   constructor() {
-    addIcons({ settings, add, checkmark, close, language, book, list });
+    addIcons({ settings, settingsOutline, add, addCircleOutline, checkmark, close, language, book, bookOutline, list, libraryOutline });
     this.loadWordOfTheDay();
   }
 
