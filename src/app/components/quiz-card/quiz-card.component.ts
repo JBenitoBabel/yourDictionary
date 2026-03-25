@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from '@ionic/angular/standalone';
 
@@ -10,9 +10,14 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from 
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton]
 })
 export class QuizCardComponent {
+  isExpanding = false;
   @Output() startQuiz = new EventEmitter<void>();
 
   onStartQuiz(): void {
-    this.startQuiz.emit();
+    this.isExpanding = true;
+    setTimeout(() => {
+      this.startQuiz.emit();
+      this.isExpanding = false;
+    }, 600);
   }
 }

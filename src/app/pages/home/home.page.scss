@@ -6,16 +6,25 @@
   padding: var(--space-lg) var(--space-md);
   border-bottom: 1px solid var(--color-border-light);
   
-  .points-info {
+  .points-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+  
+  .points-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
   
   .points-label {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-caption);
     color: var(--color-text-secondary);
-    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
   }
   
   .points-value {
@@ -24,15 +33,14 @@
     gap: var(--space-xs);
     
     .number {
-      font-size: var(--font-size-4xl);
+      font-size: var(--font-size-3xl);
       font-weight: var(--font-weight-extrabold);
       color: var(--color-primary);
     }
     
     .unit {
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-sm);
       color: var(--color-text-secondary);
-      font-weight: var(--font-weight-medium);
     }
   }
 }
@@ -54,10 +62,6 @@
   transition: all var(--transition-fast);
   border: 2px solid var(--color-accent);
   
-  &:active {
-    transform: scale(0.98);
-  }
-  
   .action-content {
     display: flex;
     align-items: center;
@@ -76,7 +80,6 @@
     .cost {
       font-size: var(--font-size-sm);
       color: var(--color-secondary);
-      font-weight: var(--font-weight-medium);
     }
   }
 }
@@ -98,14 +101,12 @@
   
   h3 {
     font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
     margin: 0 0 var(--space-sm);
   }
   
   p {
     color: var(--color-text-secondary);
     margin: 0;
-    font-size: var(--font-size-base);
   }
 }
 
@@ -124,7 +125,6 @@
     --background: var(--color-primary);
     --color: var(--color-text-inverse);
     height: 48px;
-    font-weight: var(--font-weight-semibold);
   }
 }
 
@@ -137,7 +137,6 @@
     
     .quiz-label {
       display: block;
-      font-size: var(--font-size-sm);
       color: var(--color-text-secondary);
       margin-bottom: var(--space-sm);
     }
@@ -162,15 +161,9 @@
     background: var(--color-surface);
     border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
     color: var(--color-text);
     cursor: pointer;
     transition: all var(--transition-fast);
-    
-    &:hover:not(.disabled) {
-      border-color: var(--color-primary);
-    }
     
     &.correct {
       background: rgba(45, 211, 111, 0.15);
@@ -195,7 +188,6 @@
     padding: var(--space-md);
     border-radius: var(--radius-md);
     margin-top: var(--space-lg);
-    font-weight: var(--font-weight-semibold);
     
     &.correct {
       background: rgba(45, 211, 111, 0.15);

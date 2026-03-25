@@ -1,9 +1,8 @@
-<ion-card class="quiz-card" (click)="onStartQuiz()">
+<ion-card class="quiz-card" [class.expanding]="isExpanding" (click)="onStartQuiz()">
   <ion-card-header>
     <ion-card-title>Quiz</ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <p>Pon a prueba tus conocimientos</p>
-    <ion-button fill="outline" color="primary">Comenzar</ion-button>
   </ion-card-content>
 </ion-card>

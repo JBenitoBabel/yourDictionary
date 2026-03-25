@@ -13,10 +13,20 @@
   <!-- Points Banner -->
   <div class="points-banner">
     <div class="points-info">
-      <span class="points-label">Tu progreso</span>
-      <div class="points-value">
-        <span class="number">{{ points() }}</span>
-        <span class="unit">pts</span>
+      <div class="points-row">
+        <div class="points-item">
+          <span class="points-label">Puntos</span>
+          <div class="points-value">
+            <span class="number">{{ points() }}</span>
+            <span class="unit">pts</span>
+          </div>
+        </div>
+        <div class="points-item">
+          <span class="points-label">Cartas</span>
+          <div class="points-value">
+            <span class="number">{{ wordsCount() }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -35,7 +45,7 @@
           <div class="action-card claim-card" (click)="claimNewWord()">
             <div class="action-content">
               <ion-icon name="add-circle-outline"></ion-icon>
-              <span>Reclamar otra palabra</span>
+              <span>Reclamar otra carta</span>
               <span class="cost">-{{ COST_CLAIM_WORD }} pts</span>
             </div>
           </div>

@@ -58,6 +58,7 @@ export class HomePage {
   title = computed(() => this.getTitleByPoints(this.pointsService.totalPoints()));
   points = computed(() => this.pointsService.totalPoints());
   words = this.dictionaryService.words;
+  wordsCount = computed(() => this.words().length);
   hasWords = computed(() => this.words().length > 0);
   hasEnoughWordsForQuiz = computed(() => this.words().length >= 5);
   canClaimWord = computed(() => this.points() >= this.COST_CLAIM_WORD);
