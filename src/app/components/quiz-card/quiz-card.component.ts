@@ -10,14 +10,17 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/ang
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
 export class QuizCardComponent {
+  isFlipped = signal(false);
   isExpanding = false;
   @Output() startQuiz = new EventEmitter<void>();
 
-  onStartQuiz(): void {
-    this.isExpanding = true;
-    setTimeout(() => {
-      this.startQuiz.emit();
-      this.isExpanding = false;
-    }, 600);
+  onCardClick(): void {
+    this.isFlipped.update(v => !v);
+    
+    if (this.isFlipped()) {
+      setTimeout(() => {
+        this.startQuiz.emit();
+      }, 600);
+    }
   }
 }

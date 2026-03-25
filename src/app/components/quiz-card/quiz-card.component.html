@@ -1,8 +1,24 @@
-<ion-card class="quiz-card" [class.expanding]="isExpanding" (click)="onStartQuiz()">
-  <ion-card-header>
-    <ion-card-title>Quiz</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <p>Pon a prueba tus conocimientos</p>
-  </ion-card-content>
-</ion-card>
+<div class="flip-card" (click)="onCardClick()">
+  <div class="flip-card-inner" [class.flipped]="isFlipped()">
+    <div class="flip-card-front">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Quiz</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Pon a prueba tus conocimientos</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="flip-card-back">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Comenzar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>¡Vamos allá!</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</div>
