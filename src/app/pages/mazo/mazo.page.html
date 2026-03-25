@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mi Mazo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="mazo-content">
+  <!-- Stats Header -->
+  <div class="stats-header">
+    <div class="stat-item">
+      <span class="stat-number">{{ cardsCount() }}</span>
+      <span class="stat-label">Cartas</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">{{ wordOfDayCount() }}</span>
+      <span class="stat-label">Palabras</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">{{ quizCount() }}</span>
+      <span class="stat-label">Quiz</span>
+    </div>
+  </div>
+
+  @if (cards().length === 0) {
+    <div class="empty-state">
+      <ion-icon name="card-outline"></ion-icon>
+      <h3>Aún no tienes cartas</h3>
+      <p>Revela la palabra del día para obtener tu primera carta</p>
+    </div>
+  } @else {
+    <div class="cards-grid">
+      @for (card of cards(); track card.id) {
+        <div class="mazo-card" [class.word-card]="card.type === 'word-of-day'" [class.quiz-card]="card.type === 'quiz'">
+          <div class="card-header">
+            <span class="card-type">
+              <ion-icon [name]="getCardTypeIcon(card.type)"></ion-icon>
+              {{ getCardTypeLabel(card.type) }}
+            </span>
+            <span class="card-date">{{ formatDate(card.revealedAt) }}</span>
+          </div>
+          @if (card.type === 'word-of-day' && card.word) {
+            <div class="card-body">
+              <span class="word-original">{{ card.word.original }}</span>
+              <span class="word-translation">{{ card.word.translation }}</span>
+              <span class="word-category">{{ card.word.category }}</span>
+            </div>
+          } @else {
+            <div class="card-body quiz-body">
+              <ion-icon name="flag"></ion-icon>
+              <span>Quiz completado</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</ion-content>

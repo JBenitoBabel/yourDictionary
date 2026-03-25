@@ -2,11 +2,12 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonModal } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline } from 'ionicons/icons';
+import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline, cardOutline } from 'ionicons/icons';
 import { DictionaryService } from '../../core/services/dictionary.service';
 import { PointsService } from '../../core/services/points.service';
 import { UserService } from '../../core/services/user.service';
 import { SettingsService } from '../../core/services/settings.service';
+import { CardsService } from '../../core/services/cards.service';
 import { Word, Difficulty } from '../../core/models/interfaces';
 import { Router } from '@angular/router';
 import { WordCardComponent } from '../../components/word-card/word-card.component';
@@ -19,8 +20,6 @@ interface QuizQuestion {
   selectedAnswer?: string;
   isCorrect?: boolean;
 }
-
-
 
 @Component({
   selector: 'app-home',
@@ -47,6 +46,7 @@ export class HomePage {
   private dictionaryService = inject(DictionaryService);
   private pointsService = inject(PointsService);
   private userService = inject(UserService);
+  private cardsService = inject(CardsService);
   settingsService = inject(SettingsService);
   private router = inject(Router);
 
@@ -56,6 +56,7 @@ export class HomePage {
   points = computed(() => this.pointsService.totalPoints());
   words = this.dictionaryService.words;
   wordsCount = computed(() => this.words().length);
+  cardsCount = computed(() => this.cardsService.getCardsCount());
   hasWords = computed(() => this.words().length > 0);
   hasEnoughWordsForQuiz = computed(() => this.words().length >= 5);
   canClaimWord = computed(() => this.points() >= this.COST_CLAIM_WORD);
@@ -67,7 +68,7 @@ export class HomePage {
   quizAnswered = signal(false);
 
   constructor() {
-    addIcons({ settings, settingsOutline, add, addCircleOutline, checkmark, close, language, book, bookOutline, list, libraryOutline });
+    addIcons({ settings, settingsOutline, add, addCircleOutline, checkmark, close, language, book, bookOutline, list, libraryOutline, cardOutline });
     this.loadWordOfTheDay();
   }
 
@@ -87,7 +88,13 @@ export class HomePage {
   }
 
   flipCard(): void {
+    const wasFlipped = this.isFlipped();
     this.isFlipped.update(v => !v);
+    
+    // Si se acaba de revelar (pasó de false a true), guardar carta
+    if (!wasFlipped && this.wordOfTheDay()) {
+      this.cardsService.revealWordOfDayCard(this.wordOfTheDay()!);
+    }
   }
 
   claimNewWord(): void {
@@ -99,6 +106,9 @@ export class HomePage {
 
   startQuiz(): void {
     if (!this.hasEnoughWordsForQuiz()) return;
+
+    // Guardar carta de quiz
+    this.cardsService.revealQuizCard();
 
     const allWords = this.words();
     const difficulty = this.settingsService.getSettings().difficulty;
@@ -170,5 +180,9 @@ export class HomePage {
 
   goToDictionary(): void {
     this.router.navigate(['/dictionary']);
+  }
+
+  goToMazo(): void {
+    this.router.navigate(['/mazo']);
   }
 }

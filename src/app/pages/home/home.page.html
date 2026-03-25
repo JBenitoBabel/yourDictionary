@@ -22,9 +22,15 @@
           </div>
         </div>
         <div class="points-item">
-          <span class="points-label">Cartas</span>
+          <span class="points-label">Palabras</span>
           <div class="points-value">
             <span class="number">{{ wordsCount() }}</span>
+          </div>
+        </div>
+        <div class="points-item">
+          <span class="points-label">Cartas</span>
+          <div class="points-value">
+            <span class="number">{{ cardsCount() }}</span>
           </div>
         </div>
       </div>
@@ -68,10 +74,16 @@
 
   <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <ion-button expand="block" fill="solid" (click)="goToDictionary()">
-      <ion-icon slot="start" name="library-outline"></ion-icon>
-      Mi Diccionario
-    </ion-button>
+    <div class="nav-buttons">
+      <ion-button fill="solid" class="nav-btn" (click)="goToDictionary()">
+        <ion-icon slot="start" name="library-outline"></ion-icon>
+        Mi Diccionario
+      </ion-button>
+      <ion-button fill="solid" class="nav-btn mazo-btn" (click)="goToMazo()">
+        <ion-icon slot="start" name="card-outline"></ion-icon>
+        Mi Mazo
+      </ion-button>
+    </div>
   </div>
 
   <!-- FAB -->

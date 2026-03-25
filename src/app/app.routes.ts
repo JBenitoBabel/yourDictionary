@@ -26,4 +26,8 @@ export const routes: Routes = [
     path: 'dictionary',
     loadComponent: () => import('./pages/dictionary/dictionary.page').then( m => m.DictionaryPage)
   },
+  {
+    path: 'mazo',
+    loadComponent: () => import('./pages/mazo/mazo.page').then( m => m.MazoPage)
+  },
 ];

@@ -121,10 +121,20 @@
   border-top: 1px solid var(--color-border-light);
   z-index: var(--z-footer);
   
-  ion-button {
+  .nav-buttons {
+    display: flex;
+    gap: var(--space-sm);
+  }
+  
+  .nav-btn {
+    flex: 1;
     --background: var(--color-primary);
     --color: var(--color-text-inverse);
     height: 48px;
+  }
+  
+  .mazo-btn {
+    --background: var(--color-secondary);
   }
 }
 
