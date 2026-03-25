@@ -3,12 +3,12 @@
 
 .search-section {
   padding: var(--space-md);
-  padding-top: 72px;
   background: var(--color-surface);
   
   ion-searchbar {
     --background: var(--color-background);
     margin-bottom: var(--space-sm);
+    --box-shadow: 0;
   }
 }
 

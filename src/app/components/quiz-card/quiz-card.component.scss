@@ -2,15 +2,15 @@
   margin: 16px;
   cursor: pointer;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  color: white;
+  color: var(--color-text-secondary);
 
   ion-card-title {
-    color: white;
+    color: var(--color-text-secondary);;
   }
 
   ion-card-content {
     p {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--color-text-secondary);
       margin-bottom: 12px;
     }
   }
