@@ -50,8 +50,6 @@ export class HomePage {
   settingsService = inject(SettingsService);
   private router = inject(Router);
 
-  COST_CLAIM_WORD = 10;
-
   title = computed(() => this.getTitleByPoints(this.pointsService.totalPoints()));
   points = computed(() => this.pointsService.totalPoints());
   words = this.dictionaryService.words;
@@ -59,7 +57,6 @@ export class HomePage {
   cardsCount = computed(() => this.cardsService.getCardsCount());
   hasWords = computed(() => this.words().length > 0);
   hasEnoughWordsForQuiz = computed(() => this.words().length >= 5);
-  canClaimWord = computed(() => this.points() >= this.COST_CLAIM_WORD);
 
   wordOfTheDay = signal<Word | null>(null);
   isFlipped = signal(false);
@@ -89,13 +86,6 @@ export class HomePage {
 
   flipCard(): void {
     this.isFlipped.update(v => !v);
-  }
-
-  claimNewWord(): void {
-    if (!this.canClaimWord()) return;
-
-    this.pointsService.addPoints(-this.COST_CLAIM_WORD);
-    this.loadWordOfTheDay();
   }
 
   startQuiz(): void {

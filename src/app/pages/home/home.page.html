@@ -45,16 +45,6 @@
           [isFlipped]="isFlipped()"
           (flip)="flipCard()">
         </app-word-card>
-
-        @if (canClaimWord()) {
-          <div class="action-card claim-card" (click)="claimNewWord()">
-            <div class="action-content">
-              <ion-icon name="add-circle-outline"></ion-icon>
-              <span>Reclamar otra carta</span>
-              <span class="cost">-{{ COST_CLAIM_WORD }} pts</span>
-            </div>
-          </div>
-        }
       </div>
     } @else {
       <div class="empty-state-large">
