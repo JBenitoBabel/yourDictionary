@@ -56,7 +56,12 @@
 
     @if (hasEnoughWordsForQuiz()) {
       <div class="section">
-        <app-quiz-card (startQuiz)="startQuiz()"></app-quiz-card>
+        <app-quiz-card 
+          [quiz]="currentQuiz()"
+          [quizAnswered]="quizAnswered()"
+          (startQuiz)="startQuiz()"
+          (selectAnswer)="selectAnswer($event)">
+        </app-quiz-card>
       </div>
     }
   </div>

@@ -1,6 +1,15 @@
-import { Component, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import { Word } from '../../core/models/interfaces';
+
+interface QuizQuestion {
+  word: Word;
+  options: string[];
+  correctAnswer: string;
+  selectedAnswer?: string;
+  isCorrect?: boolean;
+}
 
 @Component({
   selector: 'app-quiz-card',
@@ -10,29 +19,47 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/ang
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
 export class QuizCardComponent {
+  @Input() quiz: QuizQuestion | null = null;
+  @Input() quizAnswered = false;
+  
   isFlipped = signal(false);
   isRotating = signal(false);
   isExpanding = signal(false);
+  showContent = signal(false);
+  
   @Output() startQuiz = new EventEmitter<void>();
+  @Output() selectAnswer = new EventEmitter<string>();
 
   onCardClick(): void {
     if (!this.isFlipped()) {
       this.isFlipped.set(true);
       
-      // Después de voltear, rotar 90 grados
       setTimeout(() => {
         this.isRotating.set(true);
         
-        // Después de rotar, expandir a pantalla completa
         setTimeout(() => {
           this.isExpanding.set(true);
           
-          // Después de expandir, emitir evento
           setTimeout(() => {
+            this.showContent.set(true);
             this.startQuiz.emit();
-          }, 600);
+          }, 400);
         }, 600);
       }, 600);
     }
+  }
+
+  onOptionClick(option: string): void {
+    if (!this.quizAnswered) {
+      this.selectAnswer.emit(option);
+    }
+  }
+
+  isCorrectOption(option: string): boolean {
+    return this.quizAnswered && this.quiz?.correctAnswer === option;
+  }
+
+  isIncorrectOption(option: string): boolean {
+    return this.quizAnswered && this.quiz?.selectedAnswer === option && !this.quiz?.isCorrect;
   }
 }
