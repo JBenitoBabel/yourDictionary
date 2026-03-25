@@ -12,7 +12,7 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/ang
 export class QuizCardComponent {
   isFlipped = signal(false);
   isRotating = signal(false);
-  isExpanding = false;
+  isExpanding = signal(false);
   @Output() startQuiz = new EventEmitter<void>();
 
   onCardClick(): void {
@@ -23,9 +23,14 @@ export class QuizCardComponent {
       setTimeout(() => {
         this.isRotating.set(true);
         
-        // Después de rotar, emitir evento
+        // Después de rotar, expandir a pantalla completa
         setTimeout(() => {
-          this.startQuiz.emit();
+          this.isExpanding.set(true);
+          
+          // Después de expandir, emitir evento
+          setTimeout(() => {
+            this.startQuiz.emit();
+          }, 600);
         }, 600);
       }, 600);
     }
