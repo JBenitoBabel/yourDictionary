@@ -1,4 +1,4 @@
-<div class="flip-card" (click)="onCardClick()">
+<div class="flip-card" [class.rotating]="isRotating()" (click)="onCardClick()">
   <div class="flip-card-inner" [class.flipped]="isFlipped()">
     <div class="flip-card-front">
       <ion-card>
