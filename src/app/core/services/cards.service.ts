@@ -1,14 +1,26 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { Card, CardsData, Word } from '../models/interfaces';
 import { DictionaryService } from './dictionary.service';
+import { UserService } from './user.service';
 
 const STORAGE_KEY = 'yourDictionary_cards';
+
+// Días consecutivos para cada carta de palabra del día
+const WORD_OF_DAY_MILESTONES = [
+  { cardNumber: 1, daysRequired: 0 },    // Al añadir primera palabra
+  { cardNumber: 2, daysRequired: 30 },
+  { cardNumber: 3, daysRequired: 60 },
+  { cardNumber: 4, daysRequired: 90 },
+  { cardNumber: 5, daysRequired: 120 },
+  { cardNumber: 6, daysRequired: 150 },
+];
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsService {
   private dictionaryService = inject(DictionaryService);
+  private userService = inject(UserService);
   private cardsSignal = signal<CardsData>(this.loadFromStorage());
 
   cards = this.cardsSignal.asReadonly();
@@ -19,17 +31,12 @@ export class CardsService {
       return JSON.parse(stored);
     }
     return {
-      cards: [],
-      lastWordOfDayDate: ''
+      cards: []
     };
   }
 
   private saveToStorage(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.cardsSignal()));
-  }
-
-  private getTodayDate(): string {
-    return new Date().toISOString().split('T')[0];
   }
 
   // ============================================
@@ -53,42 +60,55 @@ export class CardsService {
   }
 
   // ============================================
-  // Revelar carta de palabra del día
+  // Verificar y crear cartas de palabra del día
   // ============================================
 
-  revealWordOfDayCard(word: Word): void {
-    const today = this.getTodayDate();
-    const data = this.cardsSignal();
-    
-    // Verificar si ya se reveló hoy
-    if (data.lastWordOfDayDate === today) {
-      return; // Ya se reveló hoy
-    }
+  checkWordOfDayCards(): void {
+    const words = this.dictionaryService.getWords();
+    const consecutiveDays = this.userService.getProgress().consecutiveDays;
+    const existingCards = this.cardsSignal().cards;
 
-    // Verificar si la palabra ya fue revelada hoy
-    const wordAlreadyRevealedToday = data.cards.some(card => {
-      const cardDate = new Date(card.revealedAt).toISOString().split('T')[0];
-      return card.wordId === word.id && cardDate === today;
+    WORD_OF_DAY_MILESTONES.forEach(milestone => {
+      // Verificar si ya tiene esta carta
+      const hasCard = existingCards.some(c => 
+        c.type === 'word-of-day' && c.cardNumber === milestone.cardNumber
+      );
+      
+      if (hasCard) return;
+
+      // Verificar condiciones
+      let shouldCreate = false;
+
+      if (milestone.cardNumber === 1) {
+        // Card 1: Al añadir primera palabra
+        shouldCreate = words.length >= 1;
+      } else {
+        // Cards 2-6: Por días consecutivos
+        shouldCreate = consecutiveDays >= milestone.daysRequired;
+      }
+
+      if (shouldCreate) {
+        // Seleccionar una palabra aleatoria
+        const randomWord = words.length > 0 
+          ? words[Math.floor(Math.random() * words.length)]
+          : undefined;
+
+        const newCard: Card = {
+          id: crypto.randomUUID(),
+          type: 'word-of-day',
+          cardNumber: milestone.cardNumber,
+          wordId: randomWord?.id,
+          revealedAt: Date.now(),
+          word: randomWord
+        };
+
+        this.cardsSignal.update(current => ({
+          ...current,
+          cards: [...current.cards, newCard]
+        }));
+      }
     });
 
-    if (wordAlreadyRevealedToday) {
-      return; // Esta palabra ya se reveló hoy
-    }
-
-    // Crear nueva carta
-    const newCard: Card = {
-      id: crypto.randomUUID(),
-      type: 'word-of-day',
-      wordId: word.id,
-      revealedAt: Date.now(),
-      word: word
-    };
-
-    this.cardsSignal.update(current => ({
-      ...current,
-      cards: [...current.cards, newCard],
-      lastWordOfDayDate: today
-    }));
     this.saveToStorage();
   }
 
@@ -123,20 +143,6 @@ export class CardsService {
   // Verificar condiciones
   // ============================================
 
-  canRevealWordOfDay(): boolean {
-    const today = this.getTodayDate();
-    const data = this.cardsSignal();
-    
-    // Si ya se reveló hoy, no se puede
-    if (data.lastWordOfDayDate === today) {
-      return false;
-    }
-
-    // Necesita al menos 1 palabra
-    const words = this.dictionaryService.getWords();
-    return words.length >= 1;
-  }
-
   canRevealQuiz(): boolean {
     // Verificar si ya se reveló un quiz
     const hasQuizCard = this.cardsSignal().cards.some(card => card.type === 'quiz');
@@ -147,27 +153,6 @@ export class CardsService {
     // Necesita al menos 5 palabras
     const words = this.dictionaryService.getWords();
     return words.length >= 5;
-  }
-
-  // ============================================
-  // Calcular cartas disponibles vs obtenidas
-  // ============================================
-
-  getAvailableCardsCount(): number {
-    let count = 0;
-    const words = this.dictionaryService.getWords();
-
-    // Carta de palabra del día: si hay palabras y no se reveló hoy
-    if (words.length >= 1 && this.canRevealWordOfDay()) {
-      count++;
-    }
-
-    // Carta de quiz: si hay 5+ palabras y no se reveló
-    if (words.length >= 5 && this.canRevealQuiz()) {
-      count++;
-    }
-
-    return count;
   }
 
   // ============================================
@@ -184,6 +169,12 @@ export class CardsService {
         return { ...card, word };
       }
       return card;
+    }).sort((a, b) => {
+      // Ordenar: word-of-day primero (por cardNumber), luego quiz
+      if (a.type === 'word-of-day' && b.type === 'quiz') return -1;
+      if (a.type === 'quiz' && b.type === 'word-of-day') return 1;
+      if (a.cardNumber && b.cardNumber) return a.cardNumber - b.cardNumber;
+      return a.revealedAt - b.revealedAt;
     });
   }
 
@@ -193,8 +184,7 @@ export class CardsService {
 
   resetCards(): void {
     this.cardsSignal.set({
-      cards: [],
-      lastWordOfDayDate: ''
+      cards: []
     });
     this.saveToStorage();
   }

@@ -48,12 +48,12 @@ export type CardType = 'word-of-day' | 'quiz';
 export interface Card {
   id: string;
   type: CardType;
-  wordId?: string;          // Solo para word-of-day
+  cardNumber?: number;      // Para word-of-day: 1-6
+  wordId?: string;          // Para word-of-day: palabra asociada
   revealedAt: number;       // Timestamp
   word?: Word;              // Para mostrar en mazo
 }
 
 export interface CardsData {
   cards: Card[];
-  lastWordOfDayDate: string;  // YYYY-MM-DD para controlar que no se repita
 }

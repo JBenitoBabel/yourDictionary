@@ -88,13 +88,7 @@ export class HomePage {
   }
 
   flipCard(): void {
-    const wasFlipped = this.isFlipped();
     this.isFlipped.update(v => !v);
-    
-    // Si se acaba de revelar (pasó de false a true), guardar carta
-    if (!wasFlipped && this.wordOfTheDay()) {
-      this.cardsService.revealWordOfDayCard(this.wordOfTheDay()!);
-    }
   }
 
   claimNewWord(): void {
