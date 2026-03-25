@@ -6,7 +6,6 @@ import {
   IonCard,
   IonCardTitle,
   IonCardContent,
-  IonButton,
 } from '@ionic/angular/standalone';
 import { SettingsService } from '../../core/services/settings.service';
 import { TranslationService } from '../../core/services/translation.service';
@@ -29,7 +28,6 @@ interface LanguageOption {
     IonCard,
     IonCardTitle,
     IonCardContent,
-    IonButton,
   ]
 })
 export class OnboardingPage {

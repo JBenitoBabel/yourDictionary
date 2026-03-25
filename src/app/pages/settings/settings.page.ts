@@ -1,19 +1,19 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonIcon, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { SettingsService } from '../../core/services/settings.service';
 import { PointsService } from '../../core/services/points.service';
 import { ThemeService } from '../../core/services/theme.service';
 import { addIcons } from 'ionicons';
-import { sunny, moon, text, trophy, easel } from 'ionicons/icons';
+import { sunny, moon, text, trophy, speedometer } from 'ionicons/icons';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonButton, IonIcon, IonButtons, IonBackButton, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonSelect, IonSelectOption, IonIcon, IonButtons, IonBackButton, CommonModule, FormsModule]
 })
 export class SettingsPage implements OnInit {
   private settingsService = inject(SettingsService);
@@ -29,7 +29,7 @@ export class SettingsPage implements OnInit {
   monthlyBest = 0;
 
   constructor() {
-    addIcons({ sunny, moon, text, trophy, easel });
+    addIcons({ sunny, moon, text, trophy, speedometer });
   }
 
   ngOnInit() {

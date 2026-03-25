@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonList, IonItem, IonLabel, IonIcon, IonButtons, IonButton, IonSegment, IonSegmentButton, IonSelect, IonSelectOption, IonBadge, IonFab, IonFabButton, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonIcon, IonButtons, IonButton, IonSelect, IonSelectOption, IonBackButton } from '@ionic/angular/standalone';
 import { DictionaryService } from '../../core/services/dictionary.service';
 import { Word, WordStatus } from '../../core/models/interfaces';
 import { addIcons } from 'ionicons';
@@ -12,7 +12,7 @@ import { trash, star, flag, book, search, close } from 'ionicons/icons';
   templateUrl: './dictionary.page.html',
   styleUrls: ['./dictionary.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonList, IonItem, IonLabel, IonIcon, IonButtons, IonButton, IonSegment, IonSegmentButton, IonSelect, IonSelectOption, IonBadge, IonFab, IonFabButton, IonBackButton, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonIcon, IonButtons, IonButton, IonSelect, IonSelectOption, IonBackButton, CommonModule, FormsModule]
 })
 export class DictionaryPage implements OnInit {
   private dictionaryService = inject(DictionaryService);

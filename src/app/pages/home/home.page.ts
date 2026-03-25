@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonModal } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline } from 'ionicons/icons';
 import { DictionaryService } from '../../core/services/dictionary.service';
@@ -39,9 +39,6 @@ interface QuizQuestion {
     IonFab,
     IonFabButton,
     IonModal,
-    IonList,
-    IonItem,
-    IonLabel,
     WordCardComponent,
     QuizCardComponent
   ]

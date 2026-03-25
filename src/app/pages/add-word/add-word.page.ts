@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonInput, IonLabel, IonSelect, IonSelectOption, IonIcon, IonItem, IonList, IonToast, IonProgressBar, IonSpinner, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonInput, IonLabel, IonSelect, IonSelectOption, IonIcon, IonItem, IonList, IonToast, IonSpinner, IonBackButton } from '@ionic/angular/standalone';
 import { DictionaryService } from '../../core/services/dictionary.service';
 import { PointsService } from '../../core/services/points.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { add, checkmark, close, book, create } from 'ionicons/icons';
   templateUrl: './add-word.page.html',
   styleUrls: ['./add-word.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonInput, IonLabel, IonSelect, IonSelectOption, IonIcon, IonItem, IonList, IonToast, IonProgressBar, IonSpinner, IonBackButton, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonInput, IonLabel, IonSelect, IonSelectOption, IonIcon, IonItem, IonList, IonToast, IonSpinner, IonBackButton, CommonModule, FormsModule]
 })
 export class AddWordPage implements OnInit {
   private dictionaryService = inject(DictionaryService);
