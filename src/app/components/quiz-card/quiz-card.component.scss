@@ -1,53 +1,262 @@
-.quiz-card {
+// ============================================
+// Flip Card Container
+// ============================================
+.flip-card {
   width: 100%;
   height: 200px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #FF8C5A 0%, #FF6B35 100%);
-  color: var(--color-text-inverse);
-  border-radius: var(--radius-lg);
-  margin: 0;
-  box-shadow: var(--shadow-md);
-  border: 1px solid #E05C2F;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
   perspective: 1000px;
-  
-  &.expanding {
+  cursor: pointer;
+  position: relative;
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+
+  &.idle {
+    // Estado inicial
+  }
+
+  &.flipped {
+    // El inner gira
+  }
+
+  &.rotating {
+    transform: scale(1.05);
+  }
+
+  &.expanded {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
     border-radius: 0;
     margin: 0;
-    box-shadow: none;
-  }
+    cursor: default;
+    transform: none;
+    animation: expandSmooth 0.3s ease forwards;
 
-  ion-card-header {
-    text-align: center;
-    padding-top: var(--space-xl);
-  }
-
-  ion-card-title {
-    color: var(--color-text-inverse);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-  }
-
-  ion-card-content {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    
-    p {
-      color: var(--color-text-inverse);
-      opacity: 0.9;
-      margin-bottom: var(--space-md);
-      font-size: var(--font-size-base);
+    .flip-card-inner {
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
     }
+
+    .flip-card-front,
+    .flip-card-back {
+      border-radius: 0;
+      box-shadow: none;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.showing {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    cursor: default;
+    transform: none;
+
+    .flip-card-inner {
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      border-radius: 0;
+      box-shadow: none;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+// ============================================
+// Flip Card Inner (para el flip horizontal)
+// ============================================
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: inherit;
+
+  .flipped &,
+  .rotating &,
+  .expanded &,
+  .showing & {
+    transform: rotateY(180deg);
+  }
+}
+
+// ============================================
+// Flip Card Faces
+// ============================================
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+// Front - Naranja
+.flip-card-front {
+  background: linear-gradient(135deg, #FF8C5A 0%, #FF6B35 100%);
+  border: 1px solid #E05C2F;
+}
+
+// Back - Naranja más suave
+.flip-card-back {
+  background: linear-gradient(135deg, #FFB380 0%, #FF9966 100%);
+  border: 1px solid #FF8040;
+  transform: rotateY(180deg);
+  overflow: auto;
+}
+
+// ============================================
+// Ionic Card Styles (dentro de las caras)
+// ============================================
+ion-card {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+}
+
+ion-card-header {
+  text-align: center;
+}
+
+ion-card-title {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+ion-card-content {
+  p {
+    color: var(--color-text-inverse);
+    opacity: 0.9;
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-base);
+  }
+}
+
+// ============================================
+// Quiz Content (integrado en flip-card-back)
+// ============================================
+.quiz-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-xl);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.quiz-question {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+
+  .quiz-label {
+    display: block;
+    color: var(--color-text-inverse);
+    opacity: 0.8;
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-base);
+  }
+
+  .quiz-word {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--color-text-inverse);
+  }
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 400px;
+}
+
+.quiz-option {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: #333;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover:not(.disabled) {
+    background: white;
+    transform: scale(1.02);
+  }
+
+  &.correct {
+    background: rgba(45, 211, 111, 0.9);
+    border-color: var(--color-success);
+    color: white;
+  }
+
+  &.incorrect {
+    background: rgba(235, 68, 90, 0.9);
+    border-color: var(--color-danger);
+    color: white;
+  }
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandSmooth {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
   }
 }

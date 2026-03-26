@@ -42,6 +42,10 @@ body {
   color: var(--color-text);
 }
 
+body.fullscreen-active {
+  overflow: hidden;
+}
+
 ion-content {
   --background: var(--color-background);
   --padding-bottom: calc(100px + env(safe-area-inset-bottom));

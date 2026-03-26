@@ -57,3 +57,12 @@ export interface Card {
 export interface CardsData {
   cards: Card[];
 }
+
+// Quiz
+export interface QuizQuestion {
+  word: Word;
+  options: string[];
+  correctAnswer: string;
+  selectedAnswer?: string;
+  isCorrect?: boolean;
+}
