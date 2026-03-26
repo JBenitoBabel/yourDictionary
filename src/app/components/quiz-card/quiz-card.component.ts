@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
+import { Component, Output, EventEmitter, Input, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { QuizQuestion } from '../../core/models/interfaces';
@@ -10,7 +10,7 @@ import { QuizQuestion } from '../../core/models/interfaces';
   standalone: true,
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
-export class QuizCardComponent {
+export class QuizCardComponent implements OnDestroy {
   @Input() quiz: QuizQuestion | null = null;
   @Input() quizAnswered = false;
 
@@ -22,22 +22,27 @@ export class QuizCardComponent {
   @Output() startQuiz = new EventEmitter<void>();
   @Output() selectAnswer = new EventEmitter<string>();
 
+  private timeoutIds: ReturnType<typeof setTimeout>[] = [];
+
   onCardClick(): void {
     if (!this.isFlipped()) {
       this.isFlipped.set(true);
 
-      setTimeout(() => {
+      const id1 = setTimeout(() => {
         this.isRotating.set(true);
 
-        setTimeout(() => {
+        const id2 = setTimeout(() => {
           this.isExpanding.set(true);
 
-          setTimeout(() => {
+          const id3 = setTimeout(() => {
             this.showContent.set(true);
             this.startQuiz.emit();
           }, 400);
+          this.timeoutIds.push(id3);
         }, 600);
+        this.timeoutIds.push(id2);
       }, 600);
+      this.timeoutIds.push(id1);
     }
   }
 
@@ -53,5 +58,10 @@ export class QuizCardComponent {
 
   isIncorrectOption(option: string): boolean {
     return this.quizAnswered && this.quiz?.selectedAnswer === option && !this.quiz?.isCorrect;
+  }
+
+  ngOnDestroy(): void {
+    this.timeoutIds.forEach(id => clearTimeout(id));
+    this.timeoutIds = [];
   }
 }
