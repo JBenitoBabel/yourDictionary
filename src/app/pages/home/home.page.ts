@@ -2,7 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline, cardOutline } from 'ionicons/icons';
+import { settings, settingsOutline, add, addCircleOutline, checkmark, close, language, book, bookOutline, list, libraryOutline, cardOutline } from 'ionicons/icons';
 import { DictionaryService } from '../../core/services/dictionary.service';
 import { PointsService } from '../../core/services/points.service';
 import { UserService } from '../../core/services/user.service';
@@ -38,9 +38,12 @@ export class HomePage {
   private pointsService = inject(PointsService);
   private userService = inject(UserService);
   private cardsService = inject(CardsService);
-  settingsService = inject(SettingsService);
+  private settingsService = inject(SettingsService);
   private router = inject(Router);
 
+  // ============================================
+  // Signals reactivos
+  // ============================================
   title = computed(() => this.getTitleByPoints(this.pointsService.totalPoints()));
   points = computed(() => this.pointsService.totalPoints());
   words = this.dictionaryService.words;
@@ -55,20 +58,16 @@ export class HomePage {
   quizAnswered = signal(false);
 
   constructor() {
-    addIcons({ settings, settingsOutline, add, addCircleOutline, checkmark, close, language, book, bookOutline, list, libraryOutline, cardOutline });
+    addIcons({
+      settings, settingsOutline, add, addCircleOutline, checkmark, close,
+      language, book, bookOutline, list, libraryOutline, cardOutline
+    });
     this.loadWordOfTheDay();
   }
 
-  private getTitleByPoints(points: number): string {
-    if (points <= 50) return 'Novato';
-    if (points <= 150) return 'Aprendíz';
-    if (points <= 300) return 'Estudiante';
-    if (points <= 500) return 'Erudito';
-    if (points <= 800) return 'Sabio';
-    if (points <= 1200) return 'Maestro';
-    return 'Gurú del Vocabulario 🎓';
-  }
-
+  // ============================================
+  // Palabra del día
+  // ============================================
   loadWordOfTheDay(): void {
     this.wordOfTheDay.set(this.dictionaryService.wordOfTheDay());
     this.isFlipped.set(false);
@@ -78,6 +77,9 @@ export class HomePage {
     this.isFlipped.update(v => !v);
   }
 
+  // ============================================
+  // Lógica del Quiz
+  // ============================================
   startQuiz(): void {
     if (!this.hasEnoughWordsForQuiz()) return;
 
@@ -89,12 +91,13 @@ export class HomePage {
     const targetWord = allWords[Math.floor(Math.random() * allWords.length)];
     const numOptions = this.getNumOptionsByDifficulty(difficulty);
 
-    const otherWords = allWords.filter(w => w.id !== targetWord.id);
-    const shuffled = otherWords.sort(() => Math.random() - 0.5);
-    const wrongAnswers = shuffled.slice(0, numOptions - 1).map(w => w.translation);
+    // No mutar arrays originales
+    const otherWords = [...allWords].filter(w => w.id !== targetWord.id);
+    const shuffledWords = [...otherWords].sort(() => Math.random() - 0.5);
+    const wrongAnswers = shuffledWords.slice(0, numOptions - 1).map(w => w.translation);
 
     const allOptions = [targetWord.translation, ...wrongAnswers];
-    const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
+    const shuffledOptions = [...allOptions].sort(() => Math.random() - 0.5);
 
     this.currentQuiz.set({
       word: targetWord,
@@ -104,34 +107,14 @@ export class HomePage {
     this.quizAnswered.set(false);
   }
 
-  private getNumOptionsByDifficulty(difficulty: Difficulty): number {
-    switch (difficulty) {
-      case 'easy': return 3;
-      case 'medium': return 4;
-      case 'hard': return 5;
-    }
-  }
-
-  getPointsByDifficulty(difficulty: Difficulty): number {
-    switch (difficulty) {
-      case 'easy': return 3;
-      case 'medium': return 4;
-      case 'hard': return 5;
-    }
-  }
-
-  selectAnswer(answer: Event): void {
+  selectAnswer(answer: string): void {
     if (this.quizAnswered()) return;
 
     const quiz = this.currentQuiz();
     if (!quiz) return;
 
-    // Extraer el texto del botón clickeado
-    const target = answer.target as HTMLElement;
-    const answerText = target.textContent?.trim() || '';
-
-    const isCorrect = answerText === quiz.correctAnswer;
-    this.currentQuiz.set({ ...quiz, selectedAnswer: answerText, isCorrect });
+    const isCorrect = answer === quiz.correctAnswer;
+    this.currentQuiz.set({ ...quiz, selectedAnswer: answer, isCorrect });
     this.quizAnswered.set(true);
 
     if (isCorrect) {
@@ -142,6 +125,40 @@ export class HomePage {
     }
   }
 
+  private getNumOptionsByDifficulty(difficulty: Difficulty): number {
+    switch (difficulty) {
+      case 'easy': return 3;
+      case 'medium': return 4;
+      case 'hard': return 5;
+      default: return 3;
+    }
+  }
+
+  private getPointsByDifficulty(difficulty: Difficulty): number {
+    switch (difficulty) {
+      case 'easy': return 3;
+      case 'medium': return 4;
+      case 'hard': return 5;
+      default: return 3;
+    }
+  }
+
+  // ============================================
+  // Títulos por puntos
+  // ============================================
+  private getTitleByPoints(points: number): string {
+    if (points <= 50) return 'Novato';
+    if (points <= 150) return 'Aprendíz';
+    if (points <= 300) return 'Estudiante';
+    if (points <= 500) return 'Erudito';
+    if (points <= 800) return 'Sabio';
+    if (points <= 1200) return 'Maestro';
+    return 'Gurú del Vocabulario 🎓';
+  }
+
+  // ============================================
+  // Navegación
+  // ============================================
   goToSettings(): void {
     this.router.navigate(['/settings']);
   }

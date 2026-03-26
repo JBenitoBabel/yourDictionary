@@ -13,25 +13,25 @@ import { QuizQuestion } from '../../core/models/interfaces';
 export class QuizCardComponent {
   @Input() quiz: QuizQuestion | null = null;
   @Input() quizAnswered = false;
-  
+
   isFlipped = signal(false);
   isRotating = signal(false);
   isExpanding = signal(false);
   showContent = signal(false);
-  
+
   @Output() startQuiz = new EventEmitter<void>();
-  @Output() selectAnswer = new EventEmitter<Event>();
+  @Output() selectAnswer = new EventEmitter<string>();
 
   onCardClick(): void {
     if (!this.isFlipped()) {
       this.isFlipped.set(true);
-      
+
       setTimeout(() => {
         this.isRotating.set(true);
-        
+
         setTimeout(() => {
           this.isExpanding.set(true);
-          
+
           setTimeout(() => {
             this.showContent.set(true);
             this.startQuiz.emit();
@@ -41,9 +41,9 @@ export class QuizCardComponent {
     }
   }
 
-  onOptionClick(option: string, event: Event): void {
+  onOptionClick(option: string): void {
     if (!this.quizAnswered) {
-      this.selectAnswer.emit(event);
+      this.selectAnswer.emit(option);
     }
   }
 

@@ -26,15 +26,15 @@
             <span class="quiz-label">¿Cuál es la traducción de?</span>
             <span class="quiz-word">{{ quiz.word.original }}</span>
           </div>
-          
+
           <div class="quiz-options">
             @for (option of quiz.options; track option) {
-              <button 
+              <button
                 class="quiz-option"
                 [class.correct]="isCorrectOption(option)"
                 [class.incorrect]="isIncorrectOption(option)"
                 [class.disabled]="quizAnswered"
-                (click)="onOptionClick(option, $event); $event.stopPropagation()">
+                (click)="onOptionClick(option); $event.stopPropagation()">
                 {{ option }}
               </button>
             }
