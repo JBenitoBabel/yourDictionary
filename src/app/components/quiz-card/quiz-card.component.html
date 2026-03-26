@@ -34,7 +34,7 @@
                 [class.correct]="isCorrectOption(option)"
                 [class.incorrect]="isIncorrectOption(option)"
                 [class.disabled]="quizAnswered"
-                (click)="onOptionClick(option); $event.stopPropagation()">
+                (click)="onOptionClick(option, $event); $event.stopPropagation()">
                 {{ option }}
               </button>
             }

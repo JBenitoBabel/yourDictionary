@@ -20,7 +20,7 @@ export class QuizCardComponent {
   showContent = signal(false);
   
   @Output() startQuiz = new EventEmitter<void>();
-  @Output() selectAnswer = new EventEmitter<string>();
+  @Output() selectAnswer = new EventEmitter<Event>();
 
   onCardClick(): void {
     if (!this.isFlipped()) {
@@ -41,9 +41,9 @@ export class QuizCardComponent {
     }
   }
 
-  onOptionClick(option: string): void {
+  onOptionClick(option: string, event: Event): void {
     if (!this.quizAnswered) {
-      this.selectAnswer.emit(option);
+      this.selectAnswer.emit(event);
     }
   }
 

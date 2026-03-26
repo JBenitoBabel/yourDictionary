@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, IonModal } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { settings, add, checkmark, close, language, book, list, bookOutline, settingsOutline, addCircleOutline, libraryOutline, cardOutline } from 'ionicons/icons';
 import { DictionaryService } from '../../core/services/dictionary.service';
@@ -29,7 +29,6 @@ import { QuizCardComponent } from '../../components/quiz-card/quiz-card.componen
     IonIcon,
     IonFab,
     IonFabButton,
-    IonModal,
     WordCardComponent,
     QuizCardComponent
   ]
@@ -52,7 +51,6 @@ export class HomePage {
 
   wordOfTheDay = signal<Word | null>(null);
   isFlipped = signal(false);
-  showQuizModal = signal(false);
   currentQuiz = signal<QuizQuestion | null>(null);
   quizAnswered = signal(false);
 
@@ -104,7 +102,6 @@ export class HomePage {
       correctAnswer: targetWord.translation
     });
     this.quizAnswered.set(false);
-    this.showQuizModal.set(true);
   }
 
   private getNumOptionsByDifficulty(difficulty: Difficulty): number {
@@ -123,14 +120,18 @@ export class HomePage {
     }
   }
 
-  selectAnswer(answer: string): void {
+  selectAnswer(answer: Event): void {
     if (this.quizAnswered()) return;
 
     const quiz = this.currentQuiz();
     if (!quiz) return;
 
-    const isCorrect = answer === quiz.correctAnswer;
-    this.currentQuiz.set({ ...quiz, selectedAnswer: answer, isCorrect });
+    // Extraer el texto del botón clickeado
+    const target = answer.target as HTMLElement;
+    const answerText = target.textContent?.trim() || '';
+
+    const isCorrect = answerText === quiz.correctAnswer;
+    this.currentQuiz.set({ ...quiz, selectedAnswer: answerText, isCorrect });
     this.quizAnswered.set(true);
 
     if (isCorrect) {
@@ -139,11 +140,6 @@ export class HomePage {
       this.pointsService.addPoints(points);
       this.userService.incrementQuizzesCorrect();
     }
-  }
-
-  closeQuiz(): void {
-    this.showQuizModal.set(false);
-    this.currentQuiz.set(null);
   }
 
   goToSettings(): void {
