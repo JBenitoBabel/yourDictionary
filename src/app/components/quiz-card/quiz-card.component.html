@@ -1,5 +1,13 @@
-<div class="flip-card" [class.rotating]="isRotating()" [class.expanding]="isExpanding()" (click)="onCardClick()">
-  <div class="flip-card-inner" [class.flipped]="isFlipped()">
+<div 
+  class="flip-card" 
+  [class.idle]="state() === 'idle'"
+  [class.flipped]="state() === 'flipped'"
+  [class.rotating]="state() === 'rotating'"
+  [class.expanded]="state() === 'expanded' || state() === 'showing'"
+  [class.showing]="state() === 'showing'"
+  (click)="onCardClick()">
+  
+  <div class="flip-card-inner">
     <div class="flip-card-front">
       <ion-card>
         <ion-card-header>
@@ -11,36 +19,36 @@
       </ion-card>
     </div>
     <div class="flip-card-back">
-      @if (!showContent()) {
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Comenzar</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>¡Vamos allá!</p>
-          </ion-card-content>
-        </ion-card>
-      } @else if (quiz) {
-        <div class="quiz-content">
-          <div class="quiz-question">
-            <span class="quiz-label">¿Cuál es la traducción de?</span>
-            <span class="quiz-word">{{ quiz.word.original }}</span>
-          </div>
-
-          <div class="quiz-options">
-            @for (option of quiz.options; track option) {
-              <button
-                class="quiz-option"
-                [class.correct]="isCorrectOption(option)"
-                [class.incorrect]="isIncorrectOption(option)"
-                [class.disabled]="quizAnswered"
-                (click)="onOptionClick(option); $event.stopPropagation()">
-                {{ option }}
-              </button>
-            }
-          </div>
-        </div>
-      }
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Comenzar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>¡Vamos allá!</p>
+        </ion-card-content>
+      </ion-card>
     </div>
   </div>
+
+  @if (state() === 'showing' && quiz) {
+    <div class="quiz-content">
+      <div class="quiz-question">
+        <span class="quiz-label">¿Cuál es la traducción de?</span>
+        <span class="quiz-word">{{ quiz.word.original }}</span>
+      </div>
+
+      <div class="quiz-options">
+        @for (option of quiz.options; track option) {
+          <button
+            class="quiz-option"
+            [class.correct]="isCorrectOption(option)"
+            [class.incorrect]="isIncorrectOption(option)"
+            [class.disabled]="quizAnswered"
+            (click)="onOptionClick(option); $event.stopPropagation()">
+            {{ option }}
+          </button>
+        }
+      </div>
+    </div>
+  }
 </div>

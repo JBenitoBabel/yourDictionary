@@ -1,7 +1,12 @@
-import { Component, Output, EventEmitter, Input, signal, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { QuizQuestion } from '../../core/models/interfaces';
+
+type QuizCardState = 'idle' | 'flipped' | 'rotating' | 'expanded' | 'showing';
+
+const delay = (ms: number): Promise<void> => 
+  new Promise(resolve => setTimeout(resolve, ms));
 
 @Component({
   selector: 'app-quiz-card',
@@ -10,40 +15,29 @@ import { QuizQuestion } from '../../core/models/interfaces';
   standalone: true,
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
-export class QuizCardComponent implements OnDestroy {
+export class QuizCardComponent {
   @Input() quiz: QuizQuestion | null = null;
   @Input() quizAnswered = false;
 
-  isFlipped = signal(false);
-  isRotating = signal(false);
-  isExpanding = signal(false);
-  showContent = signal(false);
+  state = signal<QuizCardState>('idle');
 
   @Output() startQuiz = new EventEmitter<void>();
   @Output() selectAnswer = new EventEmitter<string>();
 
-  private timeoutIds: ReturnType<typeof setTimeout>[] = [];
+  async onCardClick(): Promise<void> {
+    if (this.state() !== 'idle') return;
 
-  onCardClick(): void {
-    if (!this.isFlipped()) {
-      this.isFlipped.set(true);
+    this.state.set('flipped');
+    await delay(600);
 
-      const id1 = setTimeout(() => {
-        this.isRotating.set(true);
+    this.state.set('rotating');
+    await delay(600);
 
-        const id2 = setTimeout(() => {
-          this.isExpanding.set(true);
+    this.state.set('expanded');
+    await delay(400);
 
-          const id3 = setTimeout(() => {
-            this.showContent.set(true);
-            this.startQuiz.emit();
-          }, 400);
-          this.timeoutIds.push(id3);
-        }, 600);
-        this.timeoutIds.push(id2);
-      }, 600);
-      this.timeoutIds.push(id1);
-    }
+    this.state.set('showing');
+    this.startQuiz.emit();
   }
 
   onOptionClick(option: string): void {
@@ -58,10 +52,5 @@ export class QuizCardComponent implements OnDestroy {
 
   isIncorrectOption(option: string): boolean {
     return this.quizAnswered && this.quiz?.selectedAnswer === option && !this.quiz?.isCorrect;
-  }
-
-  ngOnDestroy(): void {
-    this.timeoutIds.forEach(id => clearTimeout(id));
-    this.timeoutIds = [];
   }
 }
