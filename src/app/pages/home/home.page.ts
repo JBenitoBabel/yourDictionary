@@ -8,18 +8,10 @@ import { PointsService } from '../../core/services/points.service';
 import { UserService } from '../../core/services/user.service';
 import { SettingsService } from '../../core/services/settings.service';
 import { CardsService } from '../../core/services/cards.service';
-import { Word, Difficulty } from '../../core/models/interfaces';
+import { Word, Difficulty, QuizQuestion } from '../../core/models/interfaces';
 import { Router } from '@angular/router';
 import { WordCardComponent } from '../../components/word-card/word-card.component';
 import { QuizCardComponent } from '../../components/quiz-card/quiz-card.component';
-
-interface QuizQuestion {
-  word: Word;
-  options: string[];
-  correctAnswer: string;
-  selectedAnswer?: string;
-  isCorrect?: boolean;
-}
 
 @Component({
   selector: 'app-home',

@@ -1,15 +1,7 @@
 import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
-import { Word } from '../../core/models/interfaces';
-
-interface QuizQuestion {
-  word: Word;
-  options: string[];
-  correctAnswer: string;
-  selectedAnswer?: string;
-  isCorrect?: boolean;
-}
+import { QuizQuestion } from '../../core/models/interfaces';
 
 @Component({
   selector: 'app-quiz-card',
