@@ -60,7 +60,8 @@
           [quiz]="currentQuiz()"
           [quizAnswered]="quizAnswered()"
           (startQuiz)="startQuiz()"
-          (selectAnswer)="selectAnswer($event)">
+          (selectAnswer)="selectAnswer($event)"
+          (close)="onQuizClose()">
         </app-quiz-card>
       </div>
     }

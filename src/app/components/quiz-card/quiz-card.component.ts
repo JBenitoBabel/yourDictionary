@@ -1,7 +1,9 @@
 import { Component, Output, EventEmitter, Input, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon } from '@ionic/angular/standalone';
 import { QuizQuestion } from '../../core/models/interfaces';
+import { addIcons } from 'ionicons';
+import { close } from 'ionicons/icons';
 
 type QuizCardState = 'idle' | 'flipped' | 'rotating' | 'expanded' | 'showing';
 
@@ -13,7 +15,7 @@ const delay = (ms: number): Promise<void> =>
   templateUrl: './quiz-card.component.html',
   styleUrls: ['./quiz-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
+  imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon]
 })
 export class QuizCardComponent implements OnDestroy {
   @Input() quiz: QuizQuestion | null = null;
@@ -23,6 +25,11 @@ export class QuizCardComponent implements OnDestroy {
 
   @Output() startQuiz = new EventEmitter<void>();
   @Output() selectAnswer = new EventEmitter<string>();
+  @Output() close = new EventEmitter<void>();
+
+  constructor() {
+    addIcons({ close });
+  }
 
   async onCardClick(): Promise<void> {
     if (this.state() !== 'idle') return;
@@ -41,10 +48,18 @@ export class QuizCardComponent implements OnDestroy {
     this.startQuiz.emit();
   }
 
-  onOptionClick(option: string): void {
+  async onOptionClick(option: string): Promise<void> {
     if (!this.quizAnswered) {
       this.selectAnswer.emit(option);
+      await delay(1500);
+      this.closeCard();
     }
+  }
+
+  closeCard(): void {
+    this.state.set('idle');
+    document.body.classList.remove('fullscreen-active');
+    this.close.emit();
   }
 
   isCorrectOption(option: string): boolean {

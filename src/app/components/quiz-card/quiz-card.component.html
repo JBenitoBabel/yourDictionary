@@ -20,6 +20,9 @@
     </div>
     <div class="flip-card-back">
       @if (state() === 'showing' && quiz) {
+        <button class="close-button" (click)="closeCard(); $event.stopPropagation()">
+          <ion-icon name="close"></ion-icon>
+        </button>
         <div class="quiz-content">
           <div class="quiz-question">
             <span class="quiz-label">¿Cuál es la traducción de?</span>

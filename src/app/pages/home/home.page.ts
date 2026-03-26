@@ -125,6 +125,11 @@ export class HomePage {
     }
   }
 
+  onQuizClose(): void {
+    this.currentQuiz.set(null);
+    this.quizAnswered.set(false);
+  }
+
   private getNumOptionsByDifficulty(difficulty: Difficulty): number {
     switch (difficulty) {
       case 'easy': return 3;
