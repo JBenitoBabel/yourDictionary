@@ -8,7 +8,7 @@
   cursor: pointer;
   position: relative;
   border-radius: var(--radius-lg);
-  transition: transform 0.6s ease, height 0.6s ease, border-radius 0.6s ease;
+  transition: transform 0.3s ease;
   overflow: hidden;
 
   &.idle {
@@ -16,14 +16,40 @@
   }
 
   &.flipped {
-    // El inner gira, no el contenedor
+    // El inner gira
   }
 
   &.rotating {
-    transform: rotateX(90deg);
+    transform: scale(1.05);
   }
 
-  &.expanded,
+  &.expanded {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    cursor: default;
+    transform: none;
+    animation: expandSmooth 0.3s ease forwards;
+
+    .flip-card-inner {
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      border-radius: 0;
+      box-shadow: none;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &.showing {
     position: fixed;
     inset: 0;
@@ -32,8 +58,8 @@
     z-index: 9999;
     border-radius: 0;
     margin: 0;
-    transform: none;
     cursor: default;
+    transform: none;
 
     .flip-card-inner {
       border-radius: 0;
@@ -59,7 +85,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   border-radius: inherit;
 
@@ -223,5 +249,14 @@ ion-card-content {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes expandSmooth {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
   }
 }

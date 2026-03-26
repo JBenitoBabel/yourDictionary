@@ -28,14 +28,14 @@ export class QuizCardComponent implements OnDestroy {
     if (this.state() !== 'idle') return;
 
     this.state.set('flipped');
-    await delay(600);
+    await delay(500);
 
     this.state.set('rotating');
-    await delay(600);
+    await delay(200);
 
     this.state.set('expanded');
     document.body.classList.add('fullscreen-active');
-    await delay(400);
+    await delay(300);
 
     this.state.set('showing');
     this.startQuiz.emit();
