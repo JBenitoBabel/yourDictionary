@@ -1,11 +1,11 @@
-import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
+import { Component, Output, EventEmitter, Input, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { QuizQuestion } from '../../core/models/interfaces';
 
 type QuizCardState = 'idle' | 'flipped' | 'rotating' | 'expanded' | 'showing';
 
-const delay = (ms: number): Promise<void> => 
+const delay = (ms: number): Promise<void> =>
   new Promise(resolve => setTimeout(resolve, ms));
 
 @Component({
@@ -15,7 +15,7 @@ const delay = (ms: number): Promise<void> =>
   standalone: true,
   imports: [CommonModule, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
-export class QuizCardComponent {
+export class QuizCardComponent implements OnDestroy {
   @Input() quiz: QuizQuestion | null = null;
   @Input() quizAnswered = false;
 
@@ -34,6 +34,7 @@ export class QuizCardComponent {
     await delay(600);
 
     this.state.set('expanded');
+    document.body.classList.add('fullscreen-active');
     await delay(400);
 
     this.state.set('showing');
@@ -52,5 +53,9 @@ export class QuizCardComponent {
 
   isIncorrectOption(option: string): boolean {
     return this.quizAnswered && this.quiz?.selectedAnswer === option && !this.quiz?.isCorrect;
+  }
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('fullscreen-active');
   }
 }
